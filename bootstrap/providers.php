@@ -2,5 +2,6 @@
 
 return [
     App\Providers\AppServiceProvider::class,
-    App\Providers\TelescopeServiceProvider::class,
+    // Only load Telescope in local environment
+    ...app()->environment('local') ? [App\Providers\TelescopeServiceProvider::class] : [],
 ];
