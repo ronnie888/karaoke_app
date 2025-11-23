@@ -1,0 +1,29 @@
+includes:
+    - ./vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - app/
+        - routes/
+
+    # Set level to 8 for maximum strictness
+    level: 8
+
+    # Ignore specific errors if needed
+    ignoreErrors:
+        - '#PHPDoc tag @var#'
+        - '#Unsafe usage of new static#'
+        - '#Illuminate\\Validation\\Rules\\In#'
+        -
+            message: '#should return array<string, array<int, Illuminate\\Contracts\\Validation\\ValidationRule\|string>>#'
+            path: app/Http/Requests/*.php
+
+    # Check missing type hints
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+
+    # Treat PHP Doc types as always correct
+    treatPhpDocTypesAsCertain: true
+
+    # Don't report unmatched ignored errors
+    reportUnmatchedIgnoredErrors: false
