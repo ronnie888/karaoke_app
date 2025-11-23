@@ -10,8 +10,8 @@ if (auth()->check()) {
 }
 @endphp
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 py-4">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
         <!-- Main Player Column -->
         <div class="lg:col-span-2">
             <!-- Video Player -->

@@ -1,7 +1,7 @@
 @props(['videoId', 'autoplay' => false])
 
 <div class="relative aspect-video bg-black rounded-lg overflow-hidden shadow-lg">
-    <div id="youtube-player"></div>
+    <div id="youtube-player" class="w-full h-full"></div>
 </div>
 
 <!-- Player Controls (Optional Enhancement) -->
