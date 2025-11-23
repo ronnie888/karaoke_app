@@ -1,5 +1,7 @@
 import './bootstrap';
 import Alpine from 'alpinejs';
+import './queue-manager';
+import './queue-sortable';
 
 // Make Alpine available globally
 window.Alpine = Alpine;

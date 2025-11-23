@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\KaraokeController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QueueController;
 use Illuminate\Support\Facades\Route;
 
 // Public karaoke routes
@@ -12,10 +14,10 @@ Route::get('/', [KaraokeController::class, 'index'])->name('home');
 Route::get('/search', [KaraokeController::class, 'search'])->name('search');
 Route::get('/watch/{videoId}', [KaraokeController::class, 'watch'])->name('watch');
 
-// Dashboard redirect (for Breeze compatibility)
-Route::get('/dashboard', function () {
-    return redirect()->route('home');
-})->middleware('auth')->name('dashboard');
+// Karaoke Dashboard (authenticated)
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
+Route::get('/dashboard/trending', [DashboardController::class, 'trending'])->middleware('auth')->name('dashboard.trending');
+Route::get('/dashboard/genre/{genre}', [DashboardController::class, 'genre'])->middleware('auth')->name('dashboard.genre');
 
 // Authentication routes (Breeze)
 require __DIR__.'/auth.php';
@@ -41,4 +43,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
     Route::post('/history/{videoId}', [HistoryController::class, 'store'])->name('history.store');
     Route::delete('/history', [HistoryController::class, 'destroy'])->name('history.destroy');
+
+    // Queue Management
+    Route::get('/queue', [QueueController::class, 'index'])->name('queue.index');
+    Route::post('/queue/add', [QueueController::class, 'add'])->name('queue.add');
+    Route::delete('/queue/clear', [QueueController::class, 'clear'])->name('queue.clear');  // Must be before {itemId}
+    Route::delete('/queue/{itemId}', [QueueController::class, 'remove'])->name('queue.remove');
+    Route::patch('/queue/reorder', [QueueController::class, 'reorder'])->name('queue.reorder');
+    Route::post('/queue/next', [QueueController::class, 'next'])->name('queue.next');
+    Route::post('/queue/play/{itemId}', [QueueController::class, 'play'])->name('queue.play');
 });

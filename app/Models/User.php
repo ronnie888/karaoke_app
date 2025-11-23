@@ -62,4 +62,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(WatchHistory::class);
     }
+
+    public function karaokeSessions(): HasMany
+    {
+        return $this->hasMany(KaraokeSession::class);
+    }
+
+    public function activeKaraokeSession(): ?KaraokeSession
+    {
+        return $this->karaokeSessions()->active()->first();
+    }
 }
