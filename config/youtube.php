@@ -117,6 +117,10 @@ return [
 
         // Video type (any, episode, movie)
         'video_type' => 'any',
+
+        // Filter embeddable videos only (any, true)
+        // Set to 'true' to only return videos that can be embedded on external websites
+        'video_embeddable' => env('YOUTUBE_VIDEO_EMBEDDABLE', 'true'),
     ],
 
     /*

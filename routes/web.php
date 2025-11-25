@@ -18,6 +18,7 @@ Route::get('/watch/{videoId}', [KaraokeController::class, 'watch'])->name('watch
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 Route::get('/dashboard/trending', [DashboardController::class, 'trending'])->middleware('auth')->name('dashboard.trending');
 Route::get('/dashboard/genre/{genre}', [DashboardController::class, 'genre'])->middleware('auth')->name('dashboard.genre');
+Route::get('/dashboard/top3/{videoId}', [DashboardController::class, 'top3'])->middleware('auth')->name('dashboard.top3');
 
 // Authentication routes (Breeze)
 require __DIR__.'/auth.php';

@@ -588,3 +588,6 @@ Built with Laravel 11, PHP 8.3, and modern web technologies.
 **Enjoy your karaoke experience! 🎤🎵**
 
 For issues or questions, please check the documentation in `.claude/KARAOKE APP/` directory.
+
+
+cd /home/forge/karaoke_app-brygxt7o.on-forge.com/current && git pull origin main && npm install --production && npm run build && php artisan view:clear && php artisan view:cache && php artisan config:cache

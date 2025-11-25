@@ -190,6 +190,128 @@ class YouTubeService
     }
 
     /**
+     * Get videos related to a specific video.
+     * Since relatedToVideoId is deprecated, we extract keywords from the video title
+     * and search for similar karaoke videos.
+     *
+     * @return Collection<int, VideoResultDTO>
+     *
+     * @throws RequestException
+     * @throws InvalidArgumentException
+     */
+    public function getRelatedVideos(string $videoId, int $maxResults = 3): Collection
+    {
+        $cacheKey = $this->getCacheKey('related', $videoId, ['maxResults' => $maxResults]);
+
+        if (config('youtube.cache.enabled', true)) {
+            $cached = $this->getCacheStore()->get($cacheKey);
+
+            if ($cached !== null) {
+                Log::info('YouTube related videos cache hit', ['video_id' => $videoId]);
+
+                return $cached;
+            }
+        }
+
+        Log::info('YouTube API related videos request', ['video_id' => $videoId]);
+
+        try {
+            // First, get the current video's details to extract keywords
+            $currentVideo = $this->getVideo($videoId);
+
+            if (! $currentVideo) {
+                Log::warning('Could not fetch video details for related videos', ['video_id' => $videoId]);
+
+                return collect();
+            }
+
+            // Extract search keywords from the title
+            $searchQuery = $this->extractSearchKeywordsFromTitle($currentVideo->title);
+
+            // Search for similar karaoke videos
+            $response = $this->client->get('/search', [
+                'part' => 'snippet',
+                'q' => $searchQuery,
+                'type' => 'video',
+                'maxResults' => min($maxResults + 5, 50), // Get a few extra to filter out the current video
+                'key' => $this->apiKey,
+            ]);
+
+            $response->throw();
+
+            $data = $response->json();
+
+            $results = $this->transformSearchResults($data['items'] ?? [])
+                ->filter(fn ($video) => $video->id !== $videoId) // Exclude the current video
+                ->take($maxResults); // Limit to requested amount
+
+            if (config('youtube.cache.enabled', true)) {
+                $this->getCacheStore()->put(
+                    $cacheKey,
+                    $results,
+                    config('youtube.cache.search_ttl', 3600)
+                );
+            }
+
+            return $results;
+        } catch (RequestException $e) {
+            Log::error('YouTube API related videos fetch failed', [
+                'video_id' => $videoId,
+                'error' => $e->getMessage(),
+            ]);
+
+            if (config('youtube.errors.throw_exceptions', false)) {
+                throw $e;
+            }
+
+            return collect();
+        }
+    }
+
+    /**
+     * Extract search keywords from a video title for finding similar content.
+     * Removes common karaoke-specific words and extracts artist/song info.
+     */
+    private function extractSearchKeywordsFromTitle(string $title): string
+    {
+        // Convert to lowercase for easier processing
+        $normalized = strtolower($title);
+
+        // Remove common karaoke-related terms
+        $removeTerms = [
+            'karaoke',
+            'with lyrics',
+            'lyrics',
+            'instrumental',
+            'official',
+            'video',
+            'hd',
+            'hq',
+            '(lower key)',
+            '(higher key)',
+            '(original key)',
+            'backing track',
+            'sing along',
+            'lyric video',
+        ];
+
+        foreach ($removeTerms as $term) {
+            $normalized = str_replace($term, '', $normalized);
+        }
+
+        // Remove content within parentheses and brackets
+        $normalized = preg_replace('/\([^)]*\)/', '', $normalized);
+        $normalized = preg_replace('/\[[^\]]*\]/', '', $normalized);
+
+        // Clean up extra spaces
+        $normalized = preg_replace('/\s+/', ' ', $normalized);
+        $normalized = trim($normalized);
+
+        // Add "karaoke" back to ensure we get karaoke results
+        return $normalized . ' karaoke';
+    }
+
+    /**
      * Get popular/trending videos.
      *
      * @return Collection<int, VideoResultDTO>
@@ -304,7 +426,7 @@ class YouTubeService
                 }
 
                 // If no kind specified, check if we have a valid video ID
-                return isset($item['id']['videoId']) || (isset($item['id']) && is_string($item['id']) && !empty($item['id']));
+                return isset($item['id']['videoId']) || (isset($item['id']) && is_string($item['id']) && ! empty($item['id']));
             })
             ->map(
                 fn (array $item): VideoResultDTO => VideoResultDTO::fromYouTubeResponse($item)

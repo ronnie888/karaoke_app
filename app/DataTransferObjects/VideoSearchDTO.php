@@ -16,6 +16,7 @@ readonly class VideoSearchDTO
      * @param  string  $safeSearch  Safe search mode (none, moderate, strict)
      * @param  string|null  $videoCategoryId  Video category filter
      * @param  string|null  $videoDefinition  Video quality (any, high, standard)
+     * @param  string|null  $videoEmbeddable  Filter embeddable videos (any, true)
      * @param  string|null  $pageToken  Pagination token
      */
     public function __construct(
@@ -26,6 +27,7 @@ readonly class VideoSearchDTO
         public string $safeSearch = 'moderate',
         public ?string $videoCategoryId = null,
         public ?string $videoDefinition = null,
+        public ?string $videoEmbeddable = 'true',
         public ?string $pageToken = null,
     ) {
         $this->validate();
@@ -53,6 +55,13 @@ readonly class VideoSearchDTO
         if (! in_array($this->safeSearch, $validSafeSearch, true)) {
             throw new \InvalidArgumentException('Safe search must be one of: ' . implode(', ', $validSafeSearch));
         }
+
+        if ($this->videoEmbeddable !== null) {
+            $validEmbeddable = ['any', 'true'];
+            if (! in_array($this->videoEmbeddable, $validEmbeddable, true)) {
+                throw new \InvalidArgumentException('videoEmbeddable must be one of: ' . implode(', ', $validEmbeddable));
+            }
+        }
     }
 
     /**
@@ -70,8 +79,9 @@ readonly class VideoSearchDTO
             'safeSearch' => $this->safeSearch,
             'videoCategoryId' => $this->videoCategoryId,
             'videoDefinition' => $this->videoDefinition,
+            'videoEmbeddable' => $this->videoEmbeddable,
             'pageToken' => $this->pageToken,
-            'type' => 'video', // Always search for videos only
+            'type' => 'video', // Always search for videos only (required when using videoEmbeddable)
             'part' => 'snippet', // Required part parameter
         ], fn ($value) => $value !== null);
     }
@@ -91,6 +101,7 @@ readonly class VideoSearchDTO
             safeSearch: $data['safeSearch'] ?? config('youtube.search.safe_search', 'moderate'),
             videoCategoryId: $data['videoCategoryId'] ?? null,
             videoDefinition: $data['videoDefinition'] ?? null,
+            videoEmbeddable: $data['videoEmbeddable'] ?? config('youtube.search.video_embeddable', 'true'),
             pageToken: $data['pageToken'] ?? null,
         );
     }

@@ -119,7 +119,11 @@
 
                     <!-- Right Column: Search & Browse (30% on lg, 50% on tablet, full on mobile) -->
                     <div class="lg:col-span-4 md:col-span-1 h-[400px] sm:h-[500px] md:h-full overflow-hidden">
-                        <x-tabbed-browse :popular-songs="$popularSongs" :favorites="$favorites" />
+                        <x-tabbed-browse
+                            :popular-songs="$popularSongs"
+                            :favorites="$favorites"
+                            :current-video-id="$currentItem?->video_id"
+                        />
                     </div>
                 </div>
             </div>

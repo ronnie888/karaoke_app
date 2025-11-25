@@ -126,4 +126,24 @@ class DashboardController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * Get top 3 related songs based on currently playing video
+     */
+    public function top3(Request $request, string $videoId)
+    {
+        try {
+            $results = $this->youtubeService->getRelatedVideos($videoId, 3);
+
+            return response()->json([
+                'success' => true,
+                'data' => $results,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch related songs',
+            ], 500);
+        }
+    }
 }
