@@ -27,9 +27,24 @@ No downloading or re-hosting. 100% YouTube‑compliant.
 # 📦 Requirements
 
 ## Core
-- **PHP 8.3** (C:\php8.3 on Windows) with extensions:
+- **PHP 8.2** (C:\php8.2 on Windows) with extensions:
   - php_redis, php_mysqli, php_pdo_mysql, php_mbstring, php_xml, php_curl, php_fileinfo, php_openssl, php_tokenizer
   - OPcache enabled for production
+  - **IMPORTANT**: This project uses PHP 8.2 specifically. Ensure your PATH points to C:\php8.2, not PHP 8.3.
+  - **SSL Certificate Bundle**: For DigitalOcean Spaces/S3 connections on Windows, curl.cainfo must be configured in C:\php8.2\php.ini:
+    ```ini
+    curl.cainfo = "C:\php8.2\cacert.pem"
+    ```
+    Download certificate from https://curl.se/ca/cacert.pem if not already present.
+  - **Switching PHP Version**: If your system uses PHP 8.3 by default:
+    ```bash
+    # Check current PHP version
+    php -v
+
+    # If showing 8.3, update your PATH to use PHP 8.2 first:
+    # Windows: set PATH=C:\php8.2;%PATH%
+    # Or update system environment variables permanently
+    ```
 - Composer 2.x
 - Laravel 11.x
 - Node.js 20+ & pnpm (faster than npm)

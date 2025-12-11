@@ -78,19 +78,35 @@ class KaraokeSession extends Model
     }
 
     /**
-     * Add video to queue
+     * Add video to queue (YouTube or local song)
      */
     public function addVideo(array $videoData): QueueItem
     {
         $maxPosition = $this->queueItems()->max('position') ?? -1;
 
         return $this->queueItems()->create([
-            'video_id' => $videoData['id'],
+            'song_id' => $videoData['song_id'] ?? null,
+            'video_id' => $videoData['id'] ?? $videoData['video_id'] ?? null,
             'title' => $videoData['title'],
             'thumbnail' => $videoData['thumbnail'] ?? null,
             'channel_title' => $videoData['channel_title'] ?? null,
             'duration' => $videoData['duration'] ?? null,
             'position' => $maxPosition + 1,
+        ]);
+    }
+
+    /**
+     * Add local song to queue by Song model
+     */
+    public function addSong(Song $song): QueueItem
+    {
+        return $this->addVideo([
+            'song_id' => $song->id,
+            'video_id' => 'song_' . $song->id, // Identifier for non-YouTube items
+            'title' => $song->title,
+            'thumbnail' => $song->thumbnail_url,
+            'channel_title' => $song->artist,
+            'duration' => $song->duration,
         ]);
     }
 

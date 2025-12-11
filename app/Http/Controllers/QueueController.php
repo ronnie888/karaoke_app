@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KaraokeSession;
 use App\Models\QueueItem;
+use App\Models\Song;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -15,10 +16,42 @@ class QueueController extends Controller
     }
 
     /**
-     * Add video to queue
+     * Add video to queue (supports both YouTube videos and local songs)
      */
     public function add(Request $request): JsonResponse
     {
+        // Check if adding a local song by song_id
+        if ($request->has('song_id')) {
+            $validated = $request->validate([
+                'song_id' => 'required|integer|exists:songs,id',
+            ]);
+
+            $song = Song::findOrFail($validated['song_id']);
+            $session = KaraokeSession::getOrCreateForUser(auth()->id());
+
+            // Check if queue is empty
+            $wasEmpty = $session->queueItems()->count() === 0 || !$session->currentItem();
+
+            $queueItem = $session->addSong($song);
+
+            // If queue was empty, auto-play this first song
+            if ($wasEmpty) {
+                $queueItem->update(['is_playing' => true]);
+                $session->update([
+                    'current_playing_id' => $queueItem->video_id,
+                    'current_position' => $queueItem->position,
+                ]);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Song added to queue',
+                'data' => $queueItem->load('song'),
+                'auto_played' => $wasEmpty,
+            ]);
+        }
+
+        // Handle YouTube video
         $validated = $request->validate([
             'video_id' => 'required|string',
             'title' => 'required|string',
@@ -191,7 +224,16 @@ class QueueController extends Controller
         $session = KaraokeSession::getOrCreateForUser(auth()->id());
 
         $currentItem = $session->currentItem();
-        $queueItems = $session->queueItems()->queued()->ordered()->get();
+        $queueItems = $session->queueItems()->queued()->ordered()->with('song')->get();
+
+        // Append formatted_duration to each queue item
+        $queueItems->each(function ($item) {
+            $item->append('formatted_duration');
+            // Add artist from song if available
+            if ($item->song) {
+                $item->artist = $item->song->artist;
+            }
+        });
 
         return response()->json([
             'success' => true,

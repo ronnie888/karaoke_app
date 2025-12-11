@@ -6,6 +6,7 @@ use App\DataTransferObjects\VideoSearchDTO;
 use App\Models\Favorite;
 use App\Models\KaraokeSession;
 use App\Models\Playlist;
+use App\Models\Song;
 use App\Services\YouTubeService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -25,9 +26,9 @@ class DashboardController extends Controller
     {
         $session = KaraokeSession::getOrCreateForUser(auth()->id());
 
-        // Get current playing item and queue
-        $currentItem = $session->currentItem();
-        $queueItems = $session->queueItems()->queued()->ordered()->get();
+        // Get current playing item and queue (eager load song for local songs)
+        $currentItem = $session->currentItem()?->load('song');
+        $queueItems = $session->queueItems()->queued()->ordered()->with('song')->get();
 
         // Get user's playlists for "Add to Playlist" dropdown
         $playlists = Playlist::where('user_id', auth()->id())
@@ -43,13 +44,24 @@ class DashboardController extends Controller
             ->limit(20)
             ->get();
 
+        // Get local songs from library (most played first)
+        $librarySongs = Song::indexed()
+            ->orderBy('play_count', 'desc')
+            ->limit(50)
+            ->get();
+
+        // Count total songs in library
+        $librarySongsCount = Song::indexed()->count();
+
         return view('karaoke.dashboard', compact(
             'session',
             'currentItem',
             'queueItems',
             'playlists',
             'popularSongs',
-            'favorites'
+            'favorites',
+            'librarySongs',
+            'librarySongsCount'
         ));
     }
 

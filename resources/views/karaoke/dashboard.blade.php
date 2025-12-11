@@ -123,6 +123,8 @@
                             :popular-songs="$popularSongs"
                             :favorites="$favorites"
                             :current-video-id="$currentItem?->video_id"
+                            :library-songs="$librarySongs"
+                            :library-songs-count="$librarySongsCount"
                         />
                     </div>
                 </div>

@@ -1,0 +1,916 @@
+phpinfo()
+PHP Version => 8.3.10
+
+System => Windows NT LAPTOP-ESMD2LU4 10.0 build 26100 (Windows 11) AMD64
+Build Date => Jul 30 2024 15:13:46
+Build System => Microsoft Windows Server 2019 Datacenter [10.0.17763]
+Compiler => Visual C++ 2019
+Architecture => x64
+Configure Command => cscript /nologo /e:jscript configure.js  "--enable-snapshot-build" "--enable-debug-pack" "--with-pdo-oci=..\..\..\..\instantclient\sdk,shared" "--with-oci8-19=..\..\..\..\instantclient\sdk,shared" "--enable-object-out-dir=../obj/" "--enable-com-dotnet=shared" "--without-analyzer" "--with-pgo"
+Server API => Command Line Interface
+Virtual Directory Support => enabled
+Configuration File (php.ini) Path =>  
+Loaded Configuration File => C:\php8.3\php.ini
+Scan this dir for additional .ini files => (none)
+Additional .ini files parsed => (none)
+PHP API => 20230831
+PHP Extension => 20230831
+Zend Extension => 420230831
+Zend Extension Build => API420230831,TS,VS16
+PHP Extension Build => API20230831,TS,VS16
+Debug Build => no
+Thread Safety => enabled
+Thread API => Windows Threads
+Zend Signal Handling => disabled
+Zend Memory Manager => enabled
+Zend Multibyte Support => provided by mbstring
+Zend Max Execution Timers => disabled
+IPv6 Support => enabled
+DTrace Support => disabled
+
+Registered PHP Streams => php, file, glob, data, http, ftp, compress.zlib, https, ftps, phar, zip
+Registered Stream Socket Transports => tcp, udp, ssl, tls, tlsv1.0, tlsv1.1, tlsv1.2, tlsv1.3
+Registered Stream Filters => convert.iconv.*, string.rot13, string.toupper, string.tolower, convert.*, consumed, dechunk, zlib.*
+
+This program makes use of the Zend Scripting Language Engine:
+Zend Engine v4.3.10, Copyright (c) Zend Technologies
+
+
+ _______________________________________________________________________
+
+
+Configuration
+
+bcmath
+
+BCMath support => enabled
+
+Directive => Local Value => Master Value
+bcmath.scale => 0 => 0
+
+calendar
+
+Calendar support => enabled
+
+Core
+
+PHP Version => 8.3.10
+
+Directive => Local Value => Master Value
+allow_url_fopen => On => On
+allow_url_include => Off => Off
+arg_separator.input => & => &
+arg_separator.output => & => &
+auto_append_file => no value => no value
+auto_globals_jit => On => On
+auto_prepend_file => no value => no value
+browscap => no value => no value
+default_charset => UTF-8 => UTF-8
+default_mimetype => text/html => text/html
+disable_classes => no value => no value
+disable_functions => no value => no value
+display_errors => Off => Off
+display_startup_errors => Off => Off
+doc_root => no value => no value
+docref_ext => no value => no value
+docref_root => no value => no value
+enable_dl => Off => Off
+enable_post_data_reading => On => On
+error_append_string => no value => no value
+error_log => no value => no value
+error_log_mode => 0644 => 0644
+error_prepend_string => no value => no value
+error_reporting => 22527 => 22527
+expose_php => On => On
+extension_dir => ext => ext
+fiber.stack_size => no value => no value
+file_uploads => On => On
+hard_timeout => 2 => 2
+highlight.comment => <font style="color: #FF8000">#FF8000</font> => <font style="color: #FF8000">#FF8000</font>
+highlight.default => <font style="color: #0000BB">#0000BB</font> => <font style="color: #0000BB">#0000BB</font>
+highlight.html => <font style="color: #000000">#000000</font> => <font style="color: #000000">#000000</font>
+highlight.keyword => <font style="color: #007700">#007700</font> => <font style="color: #007700">#007700</font>
+highlight.string => <font style="color: #DD0000">#DD0000</font> => <font style="color: #DD0000">#DD0000</font>
+html_errors => Off => Off
+ignore_repeated_errors => Off => Off
+ignore_repeated_source => Off => Off
+ignore_user_abort => Off => Off
+implicit_flush => On => On
+include_path => .;C:\php\pear => .;C:\php\pear
+input_encoding => no value => no value
+internal_encoding => no value => no value
+log_errors => On => On
+mail.add_x_header => Off => Off
+mail.force_extra_parameters => no value => no value
+mail.log => no value => no value
+mail.mixed_lf_and_crlf => Off => Off
+max_execution_time => 0 => 0
+max_file_uploads => 20 => 20
+max_input_nesting_level => 64 => 64
+max_input_time => -1 => -1
+max_input_vars => 1000 => 1000
+max_multipart_body_parts => -1 => -1
+memory_limit => 5000M => 5000M
+open_basedir => no value => no value
+output_buffering => 0 => 0
+output_encoding => no value => no value
+output_handler => no value => no value
+post_max_size => 8M => 8M
+precision => 14 => 14
+realpath_cache_size => 4096K => 4096K
+realpath_cache_ttl => 120 => 120
+register_argc_argv => On => On
+report_memleaks => On => On
+report_zend_debug => Off => Off
+request_order => GP => GP
+sendmail_from => no value => no value
+sendmail_path => no value => no value
+serialize_precision => -1 => -1
+short_open_tag => Off => Off
+SMTP => localhost => localhost
+smtp_port => 25 => 25
+sys_temp_dir => no value => no value
+syslog.facility => LOG_USER => LOG_USER
+syslog.filter => no-ctrl => no-ctrl
+syslog.ident => php => php
+unserialize_callback_func => no value => no value
+upload_max_filesize => 2M => 2M
+upload_tmp_dir => no value => no value
+user_dir => no value => no value
+user_ini.cache_ttl => 300 => 300
+user_ini.filename => .user.ini => .user.ini
+variables_order => GPCS => GPCS
+windows.show_crt_warning => Off => Off
+xmlrpc_error_number => 0 => 0
+xmlrpc_errors => Off => Off
+zend.assertions => -1 => -1
+zend.detect_unicode => On => On
+zend.enable_gc => On => On
+zend.exception_ignore_args => On => On
+zend.exception_string_param_max_len => 0 => 0
+zend.max_allowed_stack_size => 0 => 0
+zend.multibyte => Off => Off
+zend.reserved_stack_size => 0 => 0
+zend.script_encoding => no value => no value
+
+ctype
+
+ctype functions => enabled
+
+curl
+
+cURL support => enabled
+cURL Information => 8.7.0-DEV
+Age => 10
+Features
+AsynchDNS => Yes
+CharConv => No
+Debug => No
+GSS-Negotiate => No
+IDN => Yes
+IPv6 => Yes
+krb4 => No
+Largefile => Yes
+libz => Yes
+NTLM => Yes
+NTLMWB => No
+SPNEGO => Yes
+SSL => Yes
+SSPI => Yes
+TLS-SRP => No
+HTTP2 => Yes
+GSSAPI => No
+KERBEROS5 => Yes
+UNIX_SOCKETS => Yes
+PSL => No
+HTTPS_PROXY => Yes
+MULTI_SSL => No
+BROTLI => No
+ALTSVC => Yes
+HTTP3 => No
+UNICODE => No
+ZSTD => No
+HSTS => Yes
+GSASL => No
+Protocols => dict, file, ftp, ftps, gopher, gophers, http, https, imap, imaps, ldap, ldaps, mqtt, pop3, pop3s, rtsp, scp, sftp, smb, smbs, smtp, smtps, telnet, tftp
+Host => x86_64-pc-win32
+SSL Version => OpenSSL/3.0.13
+ZLib Version => 1.2.12
+libSSH Version => libssh2/1.10.0
+
+Directive => Local Value => Master Value
+curl.cainfo => C:\cert\cacert.pem => C:\cert\cacert.pem
+
+date
+
+date/time support => enabled
+timelib version => 2022.10
+"Olson" Timezone Database Version => 2024.1
+Timezone Database => internal
+Default timezone => Asia/Manila
+
+Directive => Local Value => Master Value
+date.default_latitude => 31.7667 => 31.7667
+date.default_longitude => 35.2333 => 35.2333
+date.sunrise_zenith => 90.833333 => 90.833333
+date.sunset_zenith => 90.833333 => 90.833333
+date.timezone => Asia/Manila => Asia/Manila
+
+dom
+
+DOM/XML => enabled
+DOM/XML API Version => 20031129
+libxml Version => 2.10.3
+HTML Support => enabled
+XPath Support => enabled
+XPointer Support => enabled
+Schema Support => enabled
+RelaxNG Support => enabled
+
+fileinfo
+
+fileinfo support => enabled
+libmagic => 543
+
+filter
+
+Input Validation and Filtering => enabled
+
+Directive => Local Value => Master Value
+filter.default => unsafe_raw => unsafe_raw
+filter.default_flags => no value => no value
+
+gd
+
+GD Support => enabled
+GD Version => bundled (2.1.0 compatible)
+FreeType Support => enabled
+FreeType Linkage => with freetype
+FreeType Version => 2.11.1
+GIF Read Support => enabled
+GIF Create Support => enabled
+JPEG Support => enabled
+libJPEG Version => 8
+PNG Support => enabled
+libPNG Version => 1.6.34
+WBMP Support => enabled
+XPM Support => enabled
+libXpm Version => 30512
+XBM Support => enabled
+WebP Support => enabled
+BMP Support => enabled
+AVIF Support => enabled
+TGA Read Support => enabled
+
+Directive => Local Value => Master Value
+gd.jpeg_ignore_warning => On => On
+
+hash
+
+hash support => enabled
+Hashing Engines => md2 md4 md5 sha1 sha224 sha256 sha384 sha512/224 sha512/256 sha512 sha3-224 sha3-256 sha3-384 sha3-512 ripemd128 ripemd160 ripemd256 ripemd320 whirlpool tiger128,3 tiger160,3 tiger192,3 tiger128,4 tiger160,4 tiger192,4 snefru snefru256 gost gost-crypto adler32 crc32 crc32b crc32c fnv132 fnv1a32 fnv164 fnv1a64 joaat murmur3a murmur3c murmur3f xxh32 xxh64 xxh3 xxh128 haval128,3 haval160,3 haval192,3 haval224,3 haval256,3 haval128,4 haval160,4 haval192,4 haval224,4 haval256,4 haval128,5 haval160,5 haval192,5 haval224,5 haval256,5 
+
+MHASH support => Enabled
+MHASH API Version => Emulated Support
+
+iconv
+
+iconv support => enabled
+iconv implementation => "libiconv"
+iconv library version => 1.15
+
+Directive => Local Value => Master Value
+iconv.input_encoding => no value => no value
+iconv.internal_encoding => no value => no value
+iconv.output_encoding => no value => no value
+
+intl
+
+Internationalization support => enabled
+ICU version => 72.1
+ICU Data version => 72.1
+ICU TZData version => 2022e
+ICU Unicode version => 15.0
+
+Directive => Local Value => Master Value
+intl.default_locale => no value => no value
+intl.error_level => 0 => 0
+intl.use_exceptions => Off => Off
+
+json
+
+json support => enabled
+
+libxml
+
+libXML support => active
+libXML Compiled Version => 2.10.3
+libXML Loaded Version => 21003
+libXML streams => enabled
+
+mbstring
+
+Multibyte Support => enabled
+Multibyte string engine => libmbfl
+HTTP input encoding translation => disabled
+libmbfl version => 1.3.2
+
+mbstring extension makes use of "streamable kanji code filter and converter", which is distributed under the GNU Lesser General Public License version 2.1.
+
+Multibyte (japanese) regex support => enabled
+Multibyte regex (oniguruma) version => 6.9.8
+
+Directive => Local Value => Master Value
+mbstring.detect_order => no value => no value
+mbstring.encoding_translation => Off => Off
+mbstring.http_input => no value => no value
+mbstring.http_output => no value => no value
+mbstring.http_output_conv_mimetypes => ^(text/|application/xhtml\+xml) => ^(text/|application/xhtml\+xml)
+mbstring.internal_encoding => no value => no value
+mbstring.language => neutral => neutral
+mbstring.regex_retry_limit => 1000000 => 1000000
+mbstring.regex_stack_limit => 100000 => 100000
+mbstring.strict_detection => Off => Off
+mbstring.substitute_character => no value => no value
+
+mysqlnd
+
+mysqlnd => enabled
+Version => mysqlnd 8.3.10
+Compression => supported
+core SSL => supported
+extended SSL => supported
+Command buffer size => 4096
+Read buffer size => 32768
+Read timeout => 86400
+Collecting statistics => Yes
+Collecting memory statistics => No
+Tracing => n/a
+Loaded plugins => mysqlnd,debug_trace,auth_plugin_mysql_native_password,auth_plugin_mysql_clear_password,auth_plugin_caching_sha2_password,auth_plugin_sha256_password
+API Extensions => pdo_mysql
+
+openssl
+
+OpenSSL support => enabled
+OpenSSL Library Version => OpenSSL 3.0.13 30 Jan 2024
+OpenSSL Header Version => OpenSSL 3.0.13 30 Jan 2024
+Openssl default config => C:\Program Files\Common Files\SSL/openssl.cnf
+
+Directive => Local Value => Master Value
+openssl.cafile => C:\cert\cacert.pem => C:\cert\cacert.pem
+openssl.capath => no value => no value
+
+pcre
+
+PCRE (Perl Compatible Regular Expressions) Support => enabled
+PCRE Library Version => 10.42 2022-12-12
+PCRE Unicode Version => 14.0.0
+PCRE JIT Support => enabled
+PCRE JIT Target => x86 64bit (little endian + unaligned)
+
+Directive => Local Value => Master Value
+pcre.backtrack_limit => 1000000 => 1000000
+pcre.jit => On => On
+pcre.recursion_limit => 100000 => 100000
+
+PDO
+
+PDO support => enabled
+PDO drivers => mysql
+
+pdo_mysql
+
+PDO Driver for MySQL => enabled
+Client API version => mysqlnd 8.3.10
+
+Phar
+
+Phar: PHP Archive support => enabled
+Phar API version => 1.1.1
+Phar-based phar archives => enabled
+Tar-based phar archives => enabled
+ZIP-based phar archives => enabled
+gzip compression => enabled
+bzip2 compression => disabled (install ext/bz2)
+OpenSSL support => enabled
+
+
+Phar based on pear/PHP_Archive, original concept by Davey Shafik.
+Phar fully realized by Gregory Beaver and Marcus Boerger.
+Portions of tar implementation Copyright (c) 2003-2009 Tim Kientzle.
+Directive => Local Value => Master Value
+phar.cache_list => no value => no value
+phar.readonly => On => On
+phar.require_hash => On => On
+
+random
+
+Version => 8.3.10
+
+readline
+
+Readline Support => enabled
+Readline library => WinEditLine
+
+Directive => Local Value => Master Value
+cli.pager => no value => no value
+cli.prompt => \b \>  => \b \> 
+
+Reflection
+
+Reflection => enabled
+
+session
+
+Session Support => enabled
+Registered save handlers => files user 
+Registered serializer handlers => php_serialize php php_binary 
+
+Directive => Local Value => Master Value
+session.auto_start => Off => Off
+session.cache_expire => 180 => 180
+session.cache_limiter => nocache => nocache
+session.cookie_domain => no value => no value
+session.cookie_httponly => Off => Off
+session.cookie_lifetime => 0 => 0
+session.cookie_path => / => /
+session.cookie_samesite => no value => no value
+session.cookie_secure => Off => Off
+session.gc_divisor => 1000 => 1000
+session.gc_maxlifetime => 1440 => 1440
+session.gc_probability => 1 => 1
+session.lazy_write => On => On
+session.name => PHPSESSID => PHPSESSID
+session.referer_check => no value => no value
+session.save_handler => files => files
+session.save_path => no value => no value
+session.serialize_handler => php => php
+session.sid_bits_per_character => 5 => 5
+session.sid_length => 26 => 26
+session.upload_progress.cleanup => On => On
+session.upload_progress.enabled => On => On
+session.upload_progress.freq => 1% => 1%
+session.upload_progress.min_freq => 1 => 1
+session.upload_progress.name => PHP_SESSION_UPLOAD_PROGRESS => PHP_SESSION_UPLOAD_PROGRESS
+session.upload_progress.prefix => upload_progress_ => upload_progress_
+session.use_cookies => On => On
+session.use_only_cookies => On => On
+session.use_strict_mode => Off => Off
+session.use_trans_sid => Off => Off
+
+SimpleXML
+
+SimpleXML support => enabled
+Schema support => enabled
+
+sodium
+
+sodium support => enabled
+libsodium headers version => 1.0.18
+libsodium library version => 1.0.18
+
+SPL
+
+SPL support => enabled
+Interfaces => OuterIterator, RecursiveIterator, SeekableIterator, SplObserver, SplSubject
+Classes => AppendIterator, ArrayIterator, ArrayObject, BadFunctionCallException, BadMethodCallException, CachingIterator, CallbackFilterIterator, DirectoryIterator, DomainException, EmptyIterator, FilesystemIterator, FilterIterator, GlobIterator, InfiniteIterator, InvalidArgumentException, IteratorIterator, LengthException, LimitIterator, LogicException, MultipleIterator, NoRewindIterator, OutOfBoundsException, OutOfRangeException, OverflowException, ParentIterator, RangeException, RecursiveArrayIterator, RecursiveCachingIterator, RecursiveCallbackFilterIterator, RecursiveDirectoryIterator, RecursiveFilterIterator, RecursiveIteratorIterator, RecursiveRegexIterator, RecursiveTreeIterator, RegexIterator, RuntimeException, SplDoublyLinkedList, SplFileInfo, SplFileObject, SplFixedArray, SplHeap, SplMinHeap, SplMaxHeap, SplObjectStorage, SplPriorityQueue, SplQueue, SplStack, SplTempFileObject, UnderflowException, UnexpectedValueException
+
+standard
+
+Dynamic Library Support => enabled
+Internal Sendmail Support for Windows => enabled
+
+Directive => Local Value => Master Value
+assert.active => On => On
+assert.bail => Off => Off
+assert.callback => no value => no value
+assert.exception => On => On
+assert.warning => On => On
+auto_detect_line_endings => Off => Off
+default_socket_timeout => 60 => 60
+from => no value => no value
+session.trans_sid_hosts => no value => no value
+session.trans_sid_tags => a=href,area=href,frame=src,form= => a=href,area=href,frame=src,form=
+unserialize_max_depth => 4096 => 4096
+url_rewriter.hosts => no value => no value
+url_rewriter.tags => form= => form=
+user_agent => no value => no value
+
+tokenizer
+
+Tokenizer Support => enabled
+
+xml
+
+XML Support => active
+XML Namespace Support => active
+libxml2 Version => 2.10.3
+
+xmlreader
+
+XMLReader => enabled
+
+xmlwriter
+
+XMLWriter => enabled
+
+zip
+
+Zip => enabled
+Zip version => 1.22.3
+Libzip version => 1.7.1
+BZIP2 compression => Yes
+XZ compression => Yes
+ZSTD compression => No
+AES-128 encryption => Yes
+AES-192 encryption => Yes
+AES-256 encryption => Yes
+
+zlib
+
+ZLib Support => enabled
+Stream Wrapper => compress.zlib://
+Stream Filter => zlib.inflate, zlib.deflate
+Compiled Version => 1.2.12
+Linked Version => 1.2.12
+
+Directive => Local Value => Master Value
+zlib.output_compression => Off => Off
+zlib.output_compression_level => -1 => -1
+zlib.output_handler => no value => no value
+
+Additional Modules
+
+Module Name
+
+Environment
+
+Variable => Value
+ACLOCAL_PATH => C:\Program Files\Git\mingw64\share\aclocal;C:\Program Files\Git\usr\share\aclocal
+ACSvcPort => 17532
+ALLUSERSPROFILE => C:\ProgramData
+APPDATA => C:\Users\pc1lu\AppData\Roaming
+APPLICATIONINSIGHTS_CONFIGURATION_CONTENT => {}
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL => 1
+APPLICATION_INSIGHTS_NO_STATSBEAT => true
+APP_DEBUG => true
+APP_ENV => local
+APP_FAKER_LOCALE => en_US
+APP_FALLBACK_LOCALE => en
+APP_KEY => base64:jKIveKcCoUsmR4RIjoS3klj2FBr7lGH7Uc4y/qzuTc0=
+APP_LOCALE => en
+APP_MAINTENANCE_DRIVER => file
+APP_NAME => Karaoke Tube
+APP_TIMEZONE => UTC
+APP_URL => http://localhost:8000
+AWS_ACCESS_KEY_ID =>  
+AWS_BUCKET =>  
+AWS_DEFAULT_REGION => us-east-1
+AWS_SECRET_ACCESS_KEY =>  
+AWS_USE_PATH_STYLE_ENDPOINT => false
+BCRYPT_ROUNDS => 12
+BROADCAST_CONNECTION => log
+CACHE_PREFIX =>  
+CACHE_STORE => file
+CHROME_CRASHPAD_PIPE_NAME => \\.\pipe\crashpad_18416_PEJXXEWFEDKCPOQP
+CLAUDECODE => 1
+CLAUDE_AGENT_SDK_VERSION => 0.1.56
+CLAUDE_CODE_ENTRYPOINT => claude-vscode
+COMMONPROGRAMFILES => C:\Program Files\Common Files
+COMPUTERNAME => LAPTOP-ESMD2LU4
+COMSPEC => C:\WINDOWS\system32\cmd.exe
+CONFIG_SITE => C:/Program Files/Git/etc/config.site
+COREPACK_ENABLE_AUTO_PIN => 0
+ChocolateyInstall => C:\ProgramData\chocolatey
+ChocolateyLastPathUpdate => 133173778907235645
+CommonProgramFiles(x86) => C:\Program Files (x86)\Common Files
+CommonProgramW6432 => C:\Program Files\Common Files
+DB_CONNECTION => mysql
+DB_DATABASE => karaoke
+DB_HOST => 127.0.0.1
+DB_PASSWORD => 1234567890
+DB_PORT => 3307
+DB_USERNAME => laravel_user
+DEBUGBAR_ENABLED => true
+DISPLAY => needs-to-be-defined
+DriverData => C:\Windows\System32\Drivers\DriverData
+EFC_8204_1262719628 => 1
+EFC_8204_1592913036 => 1
+EFC_8204_2283032206 => 1
+EFC_8204_2775293581 => 1
+EFC_8204_3789132940 => 1
+ELECTRON_RUN_AS_NODE => 1
+EXEPATH => C:\Program Files\Git\bin
+FILESYSTEM_DISK => local
+FPS_BROWSER_APP_PROFILE_STRING => Internet Explorer
+FPS_BROWSER_USER_PROFILE_STRING => Default
+GIT_EDITOR => true
+HOME => C:\Users\pc1lu
+HOMEDRIVE => C:
+HOMEPATH => \Users\pc1lu
+HOSTNAME => LAPTOP-ESMD2LU4
+INFOPATH => C:\Program Files\Git\mingw64\local\info;C:\Program Files\Git\mingw64\share\info;C:\Program Files\Git\usr\local\info;C:\Program Files\Git\usr\share\info;C:\Program Files\Git\usr\info;C:\Program Files\Git\share\info
+LANG => en_US.UTF-8
+LOCALAPPDATA => C:\Users\pc1lu\AppData\Local
+LOGONSERVER => \\LAPTOP-ESMD2LU4
+LOG_CHANNEL => stack
+LOG_DEPRECATIONS_CHANNEL => null
+LOG_LEVEL => debug
+LOG_STACK => single
+MAIL_FROM_ADDRESS => noreply@karaoke.test
+MAIL_FROM_NAME => Karaoke Tube
+MAIL_HOST => 127.0.0.1
+MAIL_MAILER => log
+MAIL_PASSWORD => null
+MAIL_PORT => 2525
+MAIL_SCHEME => null
+MAIL_USERNAME => null
+MANPATH => C:\Program Files\Git\mingw64\local\man;C:\Program Files\Git\mingw64\share\man;C:\Program Files\Git\usr\local\man;C:\Program Files\Git\usr\share\man;C:\Program Files\Git\usr\man;C:\Program Files\Git\share\man
+MEMCACHED_HOST => 127.0.0.1
+MINGW_CHOST => x86_64-w64-mingw32
+MINGW_PACKAGE_PREFIX => mingw-w64-x86_64
+MINGW_PREFIX => C:/Program Files/Git/mingw64
+MSYSTEM => MINGW64
+MSYSTEM_CARCH => x86_64
+MSYSTEM_CHOST => x86_64-w64-mingw32
+MSYSTEM_PREFIX => C:/Program Files/Git/mingw64
+NDI_RUNTIME_DIR_V2 => C:\Program Files\NDI\NDI 5 Runtime\v5
+NDI_RUNTIME_DIR_V3 => C:\Program Files\NDI\NDI 5 Runtime\v5
+NDI_RUNTIME_DIR_V4 => C:\Program Files\NDI\NDI 5 Runtime\v5
+NDI_RUNTIME_DIR_V5 => C:\Program Files\NDI\NDI 5 Runtime\v5
+NUMBER_OF_PROCESSORS => 8
+NVM_HOME => C:\Users\pc1lu\.config\herd\bin\nvm
+NVM_SYMLINK => C:\Program Files\nodejs
+NoDefaultCurrentDirectoryInExePath => 1
+ORIGINAL_PATH => C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\pc1lu\bin;C:\Program Files (x86)\VMware\VMware Workstation\bin;C:\Python313\Scripts;C:\Python313;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\ProgramData\ComposerSetup\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\ffmpeg;C:\ProgramData\chocolatey\bin;C:\Program Files\Streamlink\bin;C:\Program Files\Amazon\AWSCLIV2;C:\Program Files\dotnet;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit;C:\Users\pc1lu\.config\herd\bin\nvm;C:\Program Files\nodejs;C:\php8.3;C:\Program Files\PuTTY;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\PostgreSQL\17\bin;C:\Users\pc1lu\AppData\Local\Microsoft\WindowsApps\python.exe;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Users\pc1lu\.config\herd\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\Users\pc1lu\AppData\Local\Microsoft\WindowsApps;C:\Users\pc1lu\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\pc1lu\AppData\Roaming\Composer\vendor\bin;C:\ffmpeg;C:\Users\pc1lu\Desktop\mpv.exe;C:\Users\pc1lu\AppData\Local\GitHubDesktop\bin;C:\flutter\bin;C:\Users\pc1lu\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\pc1lu\AppData\Local\Programs\Ollama;C:\Users\pc1lu\.bun\bin;C:\Users\pc1lu\AppData\Local\Programs\Kiro\bin;C:\Users\pc1lu\AppData\Roaming\npm;C:\Program Files\mitmproxy\bin;C:\Users\pc1lu\AppData\Local\Programs\Fiddler
+ORIGINAL_TEMP => C:/Users/pc1lu/AppData/Local/Temp
+ORIGINAL_TMP => C:/Users/pc1lu/AppData/Local/Temp
+ORIGINAL_XDG_CURRENT_DESKTOP => undefined
+OS => Windows_NT
+OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE => delta
+OneDrive => C:\Users\pc1lu\OneDrive
+OneDriveConsumer => C:\Users\pc1lu\OneDrive
+PATH => C:\Users\pc1lu\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\pc1lu\bin;C:\Program Files (x86)\VMware\VMware Workstation\bin;C:\Python313\Scripts;C:\Python313;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\ProgramData\ComposerSetup\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\ffmpeg;C:\ProgramData\chocolatey\bin;C:\Program Files\Streamlink\bin;C:\Program Files\Amazon\AWSCLIV2;C:\Program Files\dotnet;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit;C:\Users\pc1lu\.config\herd\bin\nvm;C:\Program Files\nodejs;C:\php8.3;C:\Program Files\PuTTY;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\PostgreSQL\17\bin;C:\Users\pc1lu\AppData\Local\Microsoft\WindowsApps\python.exe;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Users\pc1lu\.config\herd\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\Users\pc1lu\AppData\Local\Microsoft\WindowsApps;C:\Users\pc1lu\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\pc1lu\AppData\Roaming\Composer\vendor\bin;C:\ffmpeg;C:\Users\pc1lu\Desktop\mpv.exe;C:\Users\pc1lu\AppData\Local\GitHubDesktop\bin;C:\flutter\bin;C:\Users\pc1lu\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\pc1lu\AppData\Local\Programs\Ollama;C:\Users\pc1lu\.bun\bin;C:\Users\pc1lu\AppData\Local\Programs\Kiro\bin;C:\Users\pc1lu\AppData\Roaming\npm;C:\Program Files\mitmproxy\bin;C:\Users\pc1lu\AppData\Local\Programs\Fiddler;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+PATHEXT => .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW
+PHP_CLI_SERVER_WORKERS => 4
+PKG_CONFIG_PATH => C:\Program Files\Git\mingw64\lib\pkgconfig;C:\Program Files\Git\mingw64\share\pkgconfig
+PKG_CONFIG_SYSTEM_INCLUDE_PATH => C:/Program Files/Git/mingw64/include
+PKG_CONFIG_SYSTEM_LIBRARY_PATH => C:/Program Files/Git/mingw64/lib
+PLINK_PROTOCOL => ssh
+PROCESSOR_ARCHITECTURE => AMD64
+PROCESSOR_IDENTIFIER => Intel64 Family 6 Model 140 Stepping 1, GenuineIntel
+PROCESSOR_LEVEL => 6
+PROCESSOR_REVISION => 8c01
+PROGF81DEF27053 => 1
+PROGRAMFILES => C:\Program Files
+PS1 => \[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[0m\]\n$ 
+PSModulePath => C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+PUBLIC => C:\Users\Public
+PWD => C:/CURSOR AI Projects/games/karaoke
+ProgramData => C:\ProgramData
+ProgramFiles(x86) => C:\Program Files (x86)
+ProgramW6432 => C:\Program Files
+QUEUE_CONNECTION => sync
+REDIS_CLIENT => phpredis
+REDIS_HOST => 127.0.0.1
+REDIS_PASSWORD => null
+REDIS_PORT => 6379
+RlsSvcPort => 22112
+SANCTUM_STATEFUL_DOMAINS => localhost:8000
+SESSIONNAME => Console
+SESSION_DOMAIN => null
+SESSION_DRIVER => file
+SESSION_ENCRYPT => false
+SESSION_LIFETIME => 120
+SESSION_PATH => C:/Program Files/Git/
+SESSION_SECURE_COOKIE => false
+SHELL => C:\Program Files\Git\usr\bin\bash.exe
+SHLVL => 1
+SSH_ASKPASS => C:/Program Files/Git/mingw64/bin/git-askpass.exe
+SSL_CERT_FILE => C:\curl\cacert.pem
+SYSTEMDRIVE => C:
+SYSTEMROOT => C:\WINDOWS
+TELESCOPE_ENABLED => true
+TEMP => C:\Users\pc1lu\AppData\Local\Temp
+TERM => xterm-256color
+TMP => C:\Users\pc1lu\AppData\Local\Temp
+TMPDIR => C:\Users\pc1lu\AppData\Local\Temp
+USERDOMAIN => LAPTOP-ESMD2LU4
+USERDOMAIN_ROAMINGPROFILE => LAPTOP-ESMD2LU4
+USERNAME => ronnie
+USERPROFILE => C:\Users\pc1lu
+VITE_APP_NAME => Karaoke Tube
+VSCODE_CODE_CACHE_PATH => C:\Users\pc1lu\AppData\Roaming\Code\CachedData\bf9252a2fb45be6893dd8870c0bf37e2e1766d61
+VSCODE_CRASH_REPORTER_PROCESS_TYPE => extensionHost
+VSCODE_CWD => C:\WINDOWS\system32
+VSCODE_ESM_ENTRYPOINT => vs/workbench/api/node/extensionHostProcess
+VSCODE_HANDLES_UNCAUGHT_ERRORS => true
+VSCODE_IPC_HOOK => \\.\pipe\81671fa6-1.106.3-main-sock
+VSCODE_L10N_BUNDLE_LOCATION =>  
+VSCODE_NLS_CONFIG => {"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"C:\\Users\\pc1lu\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\out\\nls.messages.json","locale":"en-us","availableLanguages":{}}
+VSCODE_PID => 18416
+WINDIR => C:\WINDOWS
+YOUTUBE_API_BASE => https://www.googleapis.com/youtube/v3
+YOUTUBE_API_KEY => AIzaSyAcBxTMFZDl_sDpUY8epkOUj3hhQt6A7qY
+YOUTUBE_CACHE_TTL => 3600
+ZES_ENABLE_SYSMAN => 1
+_ => C:/php8.3/php
+__PSLockDownPolicy => 0
+
+PHP Variables
+
+Variable => Value
+$_SERVER['ACLOCAL_PATH'] => C:\Program Files\Git\mingw64\share\aclocal;C:\Program Files\Git\usr\share\aclocal
+$_SERVER['ACSvcPort'] => 17532
+$_SERVER['ALLUSERSPROFILE'] => C:\ProgramData
+$_SERVER['APPDATA'] => C:\Users\pc1lu\AppData\Roaming
+$_SERVER['APPLICATIONINSIGHTS_CONFIGURATION_CONTENT'] => {}
+$_SERVER['APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL'] => 1
+$_SERVER['APPLICATION_INSIGHTS_NO_STATSBEAT'] => true
+$_SERVER['APP_DEBUG'] => true
+$_SERVER['APP_ENV'] => local
+$_SERVER['APP_FAKER_LOCALE'] => en_US
+$_SERVER['APP_FALLBACK_LOCALE'] => en
+$_SERVER['APP_KEY'] => base64:jKIveKcCoUsmR4RIjoS3klj2FBr7lGH7Uc4y/qzuTc0=
+$_SERVER['APP_LOCALE'] => en
+$_SERVER['APP_MAINTENANCE_DRIVER'] => file
+$_SERVER['APP_NAME'] => Karaoke Tube
+$_SERVER['APP_TIMEZONE'] => UTC
+$_SERVER['APP_URL'] => http://localhost:8000
+$_SERVER['AWS_ACCESS_KEY_ID'] => 
+$_SERVER['AWS_BUCKET'] => 
+$_SERVER['AWS_DEFAULT_REGION'] => us-east-1
+$_SERVER['AWS_SECRET_ACCESS_KEY'] => 
+$_SERVER['AWS_USE_PATH_STYLE_ENDPOINT'] => false
+$_SERVER['BCRYPT_ROUNDS'] => 12
+$_SERVER['BROADCAST_CONNECTION'] => log
+$_SERVER['CACHE_PREFIX'] => 
+$_SERVER['CACHE_STORE'] => file
+$_SERVER['CHROME_CRASHPAD_PIPE_NAME'] => \\.\pipe\crashpad_18416_PEJXXEWFEDKCPOQP
+$_SERVER['CLAUDECODE'] => 1
+$_SERVER['CLAUDE_AGENT_SDK_VERSION'] => 0.1.56
+$_SERVER['CLAUDE_CODE_ENTRYPOINT'] => claude-vscode
+$_SERVER['COMMONPROGRAMFILES'] => C:\Program Files\Common Files
+$_SERVER['COMPUTERNAME'] => LAPTOP-ESMD2LU4
+$_SERVER['COMSPEC'] => C:\WINDOWS\system32\cmd.exe
+$_SERVER['CONFIG_SITE'] => C:/Program Files/Git/etc/config.site
+$_SERVER['COREPACK_ENABLE_AUTO_PIN'] => 0
+$_SERVER['ChocolateyInstall'] => C:\ProgramData\chocolatey
+$_SERVER['ChocolateyLastPathUpdate'] => 133173778907235645
+$_SERVER['CommonProgramFiles(x86)'] => C:\Program Files (x86)\Common Files
+$_SERVER['CommonProgramW6432'] => C:\Program Files\Common Files
+$_SERVER['DB_CONNECTION'] => mysql
+$_SERVER['DB_DATABASE'] => karaoke
+$_SERVER['DB_HOST'] => 127.0.0.1
+$_SERVER['DB_PASSWORD'] => 1234567890
+$_SERVER['DB_PORT'] => 3307
+$_SERVER['DB_USERNAME'] => laravel_user
+$_SERVER['DEBUGBAR_ENABLED'] => true
+$_SERVER['DISPLAY'] => needs-to-be-defined
+$_SERVER['DriverData'] => C:\Windows\System32\Drivers\DriverData
+$_SERVER['EFC_8204_1262719628'] => 1
+$_SERVER['EFC_8204_1592913036'] => 1
+$_SERVER['EFC_8204_2283032206'] => 1
+$_SERVER['EFC_8204_2775293581'] => 1
+$_SERVER['EFC_8204_3789132940'] => 1
+$_SERVER['ELECTRON_RUN_AS_NODE'] => 1
+$_SERVER['EXEPATH'] => C:\Program Files\Git\bin
+$_SERVER['FILESYSTEM_DISK'] => local
+$_SERVER['FPS_BROWSER_APP_PROFILE_STRING'] => Internet Explorer
+$_SERVER['FPS_BROWSER_USER_PROFILE_STRING'] => Default
+$_SERVER['GIT_EDITOR'] => true
+$_SERVER['HOME'] => C:\Users\pc1lu
+$_SERVER['HOMEDRIVE'] => C:
+$_SERVER['HOMEPATH'] => \Users\pc1lu
+$_SERVER['HOSTNAME'] => LAPTOP-ESMD2LU4
+$_SERVER['INFOPATH'] => C:\Program Files\Git\mingw64\local\info;C:\Program Files\Git\mingw64\share\info;C:\Program Files\Git\usr\local\info;C:\Program Files\Git\usr\share\info;C:\Program Files\Git\usr\info;C:\Program Files\Git\share\info
+$_SERVER['LANG'] => en_US.UTF-8
+$_SERVER['LOCALAPPDATA'] => C:\Users\pc1lu\AppData\Local
+$_SERVER['LOGONSERVER'] => \\LAPTOP-ESMD2LU4
+$_SERVER['LOG_CHANNEL'] => stack
+$_SERVER['LOG_DEPRECATIONS_CHANNEL'] => null
+$_SERVER['LOG_LEVEL'] => debug
+$_SERVER['LOG_STACK'] => single
+$_SERVER['MAIL_FROM_ADDRESS'] => noreply@karaoke.test
+$_SERVER['MAIL_FROM_NAME'] => Karaoke Tube
+$_SERVER['MAIL_HOST'] => 127.0.0.1
+$_SERVER['MAIL_MAILER'] => log
+$_SERVER['MAIL_PASSWORD'] => null
+$_SERVER['MAIL_PORT'] => 2525
+$_SERVER['MAIL_SCHEME'] => null
+$_SERVER['MAIL_USERNAME'] => null
+$_SERVER['MANPATH'] => C:\Program Files\Git\mingw64\local\man;C:\Program Files\Git\mingw64\share\man;C:\Program Files\Git\usr\local\man;C:\Program Files\Git\usr\share\man;C:\Program Files\Git\usr\man;C:\Program Files\Git\share\man
+$_SERVER['MEMCACHED_HOST'] => 127.0.0.1
+$_SERVER['MINGW_CHOST'] => x86_64-w64-mingw32
+$_SERVER['MINGW_PACKAGE_PREFIX'] => mingw-w64-x86_64
+$_SERVER['MINGW_PREFIX'] => C:/Program Files/Git/mingw64
+$_SERVER['MSYSTEM'] => MINGW64
+$_SERVER['MSYSTEM_CARCH'] => x86_64
+$_SERVER['MSYSTEM_CHOST'] => x86_64-w64-mingw32
+$_SERVER['MSYSTEM_PREFIX'] => C:/Program Files/Git/mingw64
+$_SERVER['NDI_RUNTIME_DIR_V2'] => C:\Program Files\NDI\NDI 5 Runtime\v5
+$_SERVER['NDI_RUNTIME_DIR_V3'] => C:\Program Files\NDI\NDI 5 Runtime\v5
+$_SERVER['NDI_RUNTIME_DIR_V4'] => C:\Program Files\NDI\NDI 5 Runtime\v5
+$_SERVER['NDI_RUNTIME_DIR_V5'] => C:\Program Files\NDI\NDI 5 Runtime\v5
+$_SERVER['NUMBER_OF_PROCESSORS'] => 8
+$_SERVER['NVM_HOME'] => C:\Users\pc1lu\.config\herd\bin\nvm
+$_SERVER['NVM_SYMLINK'] => C:\Program Files\nodejs
+$_SERVER['NoDefaultCurrentDirectoryInExePath'] => 1
+$_SERVER['ORIGINAL_PATH'] => C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\pc1lu\bin;C:\Program Files (x86)\VMware\VMware Workstation\bin;C:\Python313\Scripts;C:\Python313;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\ProgramData\ComposerSetup\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\ffmpeg;C:\ProgramData\chocolatey\bin;C:\Program Files\Streamlink\bin;C:\Program Files\Amazon\AWSCLIV2;C:\Program Files\dotnet;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit;C:\Users\pc1lu\.config\herd\bin\nvm;C:\Program Files\nodejs;C:\php8.3;C:\Program Files\PuTTY;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\PostgreSQL\17\bin;C:\Users\pc1lu\AppData\Local\Microsoft\WindowsApps\python.exe;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Users\pc1lu\.config\herd\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\Users\pc1lu\AppData\Local\Microsoft\WindowsApps;C:\Users\pc1lu\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\pc1lu\AppData\Roaming\Composer\vendor\bin;C:\ffmpeg;C:\Users\pc1lu\Desktop\mpv.exe;C:\Users\pc1lu\AppData\Local\GitHubDesktop\bin;C:\flutter\bin;C:\Users\pc1lu\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\pc1lu\AppData\Local\Programs\Ollama;C:\Users\pc1lu\.bun\bin;C:\Users\pc1lu\AppData\Local\Programs\Kiro\bin;C:\Users\pc1lu\AppData\Roaming\npm;C:\Program Files\mitmproxy\bin;C:\Users\pc1lu\AppData\Local\Programs\Fiddler
+$_SERVER['ORIGINAL_TEMP'] => C:/Users/pc1lu/AppData/Local/Temp
+$_SERVER['ORIGINAL_TMP'] => C:/Users/pc1lu/AppData/Local/Temp
+$_SERVER['ORIGINAL_XDG_CURRENT_DESKTOP'] => undefined
+$_SERVER['OS'] => Windows_NT
+$_SERVER['OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE'] => delta
+$_SERVER['OneDrive'] => C:\Users\pc1lu\OneDrive
+$_SERVER['OneDriveConsumer'] => C:\Users\pc1lu\OneDrive
+$_SERVER['PATH'] => C:\Users\pc1lu\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\pc1lu\bin;C:\Program Files (x86)\VMware\VMware Workstation\bin;C:\Python313\Scripts;C:\Python313;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\ProgramData\ComposerSetup\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\ffmpeg;C:\ProgramData\chocolatey\bin;C:\Program Files\Streamlink\bin;C:\Program Files\Amazon\AWSCLIV2;C:\Program Files\dotnet;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit;C:\Users\pc1lu\.config\herd\bin\nvm;C:\Program Files\nodejs;C:\php8.3;C:\Program Files\PuTTY;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\PostgreSQL\17\bin;C:\Users\pc1lu\AppData\Local\Microsoft\WindowsApps\python.exe;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Users\pc1lu\.config\herd\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\Users\pc1lu\AppData\Local\Microsoft\WindowsApps;C:\Users\pc1lu\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\pc1lu\AppData\Roaming\Composer\vendor\bin;C:\ffmpeg;C:\Users\pc1lu\Desktop\mpv.exe;C:\Users\pc1lu\AppData\Local\GitHubDesktop\bin;C:\flutter\bin;C:\Users\pc1lu\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\pc1lu\AppData\Local\Programs\Ollama;C:\Users\pc1lu\.bun\bin;C:\Users\pc1lu\AppData\Local\Programs\Kiro\bin;C:\Users\pc1lu\AppData\Roaming\npm;C:\Program Files\mitmproxy\bin;C:\Users\pc1lu\AppData\Local\Programs\Fiddler;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+$_SERVER['PATHEXT'] => .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW
+$_SERVER['PHP_CLI_SERVER_WORKERS'] => 4
+$_SERVER['PKG_CONFIG_PATH'] => C:\Program Files\Git\mingw64\lib\pkgconfig;C:\Program Files\Git\mingw64\share\pkgconfig
+$_SERVER['PKG_CONFIG_SYSTEM_INCLUDE_PATH'] => C:/Program Files/Git/mingw64/include
+$_SERVER['PKG_CONFIG_SYSTEM_LIBRARY_PATH'] => C:/Program Files/Git/mingw64/lib
+$_SERVER['PLINK_PROTOCOL'] => ssh
+$_SERVER['PROCESSOR_ARCHITECTURE'] => AMD64
+$_SERVER['PROCESSOR_IDENTIFIER'] => Intel64 Family 6 Model 140 Stepping 1, GenuineIntel
+$_SERVER['PROCESSOR_LEVEL'] => 6
+$_SERVER['PROCESSOR_REVISION'] => 8c01
+$_SERVER['PROGF81DEF27053'] => 1
+$_SERVER['PROGRAMFILES'] => C:\Program Files
+$_SERVER['PS1'] => \[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[0m\]\n$ 
+$_SERVER['PSModulePath'] => C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+$_SERVER['PUBLIC'] => C:\Users\Public
+$_SERVER['PWD'] => C:/CURSOR AI Projects/games/karaoke
+$_SERVER['ProgramData'] => C:\ProgramData
+$_SERVER['ProgramFiles(x86)'] => C:\Program Files (x86)
+$_SERVER['ProgramW6432'] => C:\Program Files
+$_SERVER['QUEUE_CONNECTION'] => sync
+$_SERVER['REDIS_CLIENT'] => phpredis
+$_SERVER['REDIS_HOST'] => 127.0.0.1
+$_SERVER['REDIS_PASSWORD'] => null
+$_SERVER['REDIS_PORT'] => 6379
+$_SERVER['RlsSvcPort'] => 22112
+$_SERVER['SANCTUM_STATEFUL_DOMAINS'] => localhost:8000
+$_SERVER['SESSIONNAME'] => Console
+$_SERVER['SESSION_DOMAIN'] => null
+$_SERVER['SESSION_DRIVER'] => file
+$_SERVER['SESSION_ENCRYPT'] => false
+$_SERVER['SESSION_LIFETIME'] => 120
+$_SERVER['SESSION_PATH'] => C:/Program Files/Git/
+$_SERVER['SESSION_SECURE_COOKIE'] => false
+$_SERVER['SHELL'] => C:\Program Files\Git\usr\bin\bash.exe
+$_SERVER['SHLVL'] => 1
+$_SERVER['SSH_ASKPASS'] => C:/Program Files/Git/mingw64/bin/git-askpass.exe
+$_SERVER['SSL_CERT_FILE'] => C:\curl\cacert.pem
+$_SERVER['SYSTEMDRIVE'] => C:
+$_SERVER['SYSTEMROOT'] => C:\WINDOWS
+$_SERVER['TELESCOPE_ENABLED'] => true
+$_SERVER['TEMP'] => C:\Users\pc1lu\AppData\Local\Temp
+$_SERVER['TERM'] => xterm-256color
+$_SERVER['TMP'] => C:\Users\pc1lu\AppData\Local\Temp
+$_SERVER['TMPDIR'] => C:\Users\pc1lu\AppData\Local\Temp
+$_SERVER['USERDOMAIN'] => LAPTOP-ESMD2LU4
+$_SERVER['USERDOMAIN_ROAMINGPROFILE'] => LAPTOP-ESMD2LU4
+$_SERVER['USERNAME'] => ronnie
+$_SERVER['USERPROFILE'] => C:\Users\pc1lu
+$_SERVER['VITE_APP_NAME'] => Karaoke Tube
+$_SERVER['VSCODE_CODE_CACHE_PATH'] => C:\Users\pc1lu\AppData\Roaming\Code\CachedData\bf9252a2fb45be6893dd8870c0bf37e2e1766d61
+$_SERVER['VSCODE_CRASH_REPORTER_PROCESS_TYPE'] => extensionHost
+$_SERVER['VSCODE_CWD'] => C:\WINDOWS\system32
+$_SERVER['VSCODE_ESM_ENTRYPOINT'] => vs/workbench/api/node/extensionHostProcess
+$_SERVER['VSCODE_HANDLES_UNCAUGHT_ERRORS'] => true
+$_SERVER['VSCODE_IPC_HOOK'] => \\.\pipe\81671fa6-1.106.3-main-sock
+$_SERVER['VSCODE_L10N_BUNDLE_LOCATION'] => 
+$_SERVER['VSCODE_NLS_CONFIG'] => {"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"C:\\Users\\pc1lu\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\out\\nls.messages.json","locale":"en-us","availableLanguages":{}}
+$_SERVER['VSCODE_PID'] => 18416
+$_SERVER['WINDIR'] => C:\WINDOWS
+$_SERVER['YOUTUBE_API_BASE'] => https://www.googleapis.com/youtube/v3
+$_SERVER['YOUTUBE_API_KEY'] => AIzaSyAcBxTMFZDl_sDpUY8epkOUj3hhQt6A7qY
+$_SERVER['YOUTUBE_CACHE_TTL'] => 3600
+$_SERVER['ZES_ENABLE_SYSMAN'] => 1
+$_SERVER['_'] => C:/php8.3/php
+$_SERVER['__PSLockDownPolicy'] => 0
+$_SERVER['PHP_SELF'] => 
+$_SERVER['SCRIPT_NAME'] => 
+$_SERVER['SCRIPT_FILENAME'] => 
+$_SERVER['PATH_TRANSLATED'] => 
+$_SERVER['DOCUMENT_ROOT'] => 
+$_SERVER['REQUEST_TIME_FLOAT'] => 1764686553.8777
+$_SERVER['REQUEST_TIME'] => 1764686553
+$_SERVER['argv'] => Array
+(
+)
+
+$_SERVER['argc'] => 0
+
+PHP License
+This program is free software; you can redistribute it and/or modify
+it under the terms of the PHP License as published by the PHP Group
+and included in the distribution in the file:  LICENSE
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+If you did not receive a copy of the PHP license, or have any
+questions about PHP licensing, please contact license@php.net.

@@ -60,6 +60,27 @@ return [
             'report' => false,
         ],
 
+        'spaces' => [
+            'driver' => 's3',
+            'key' => env('DO_SPACES_KEY'),
+            'secret' => env('DO_SPACES_SECRET'),
+            'endpoint' => env('DO_SPACES_ENDPOINT'),
+            'region' => env('DO_SPACES_REGION'),
+            'bucket' => env('DO_SPACES_BUCKET'),
+            'url' => env('DO_SPACES_URL'),
+            'use_path_style_endpoint' => env('DO_SPACES_USE_PATH_STYLE_ENDPOINT', false),
+            'throw' => false,
+            'visibility' => 'public',
+            'options' => [
+                'CacheControl' => 'max-age=31536000, public',
+            ],
+            'http' => [
+                // Windows development: Disable SSL verification due to cURL certificate issue
+                // Production (Linux): This won't be needed as Linux handles SSL certificates properly
+                'verify' => env('APP_ENV') === 'local' && PHP_OS_FAMILY === 'Windows' ? false : true,
+            ],
+        ],
+
     ],
 
     /*

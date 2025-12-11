@@ -7,12 +7,28 @@ use App\Http\Controllers\KaraokeController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QueueController;
+use App\Http\Controllers\SongSearchController;
+use App\Http\Controllers\SongStreamController;
 use Illuminate\Support\Facades\Route;
 
 // Public karaoke routes
 Route::get('/', [KaraokeController::class, 'index'])->name('home');
 Route::get('/search', [KaraokeController::class, 'search'])->name('search');
 Route::get('/watch/{videoId}', [KaraokeController::class, 'watch'])->name('watch');
+
+// Song Routes (Local Files)
+Route::get('/songs/{song}/stream', [SongStreamController::class, 'stream'])->name('songs.stream');
+Route::get('/songs/{song}/metadata', [SongStreamController::class, 'metadata'])->name('songs.metadata');
+
+// Song Search & Browse API
+Route::prefix('api/songs')->group(function () {
+    Route::get('/search', [SongSearchController::class, 'search'])->name('api.songs.search');
+    Route::get('/browse', [SongSearchController::class, 'browse'])->name('api.songs.browse');
+    Route::get('/genres', [SongSearchController::class, 'genres'])->name('api.songs.genres');
+    Route::get('/artists', [SongSearchController::class, 'artists'])->name('api.songs.artists');
+    Route::get('/by-language', [SongSearchController::class, 'byLanguage'])->name('api.songs.byLanguage');
+    Route::get('/{song}', [SongSearchController::class, 'show'])->name('api.songs.show');
+});
 
 // Karaoke Dashboard (authenticated)
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');

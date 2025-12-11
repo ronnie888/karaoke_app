@@ -20,8 +20,8 @@
     <!-- Queue Items -->
     <div class="flex-1 overflow-y-auto custom-scrollbar queue-items-container">
         @forelse($queueItems as $index => $item)
-            <div class="px-4 py-2">
-                <x-queue-item :item="$item" :index="$index" />
+            <div class="px-4 py-1">
+                <x-queue-item :item="$item" :index="$index" :totalItems="$queueItems->count()" />
             </div>
         @empty
             <!-- Empty State -->

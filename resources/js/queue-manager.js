@@ -46,6 +46,9 @@ class QueueManager {
                 showToast.success('Added to queue!');
                 await this.fetchQueue();
 
+                // Update the queue display without page reload
+                this.refreshQueueDisplay();
+
                 // If this was auto-played (first song), reload player to start playback
                 if (data.auto_played) {
                     showToast.info('Starting playback...');
@@ -171,7 +174,9 @@ class QueueManager {
     refreshQueueDisplay() {
         // Force a visual update of the queue list without full page reload
         const queueContainer = document.querySelector('.queue-items-container');
-        if (queueContainer && this.queueItems.length === 0) {
+        if (!queueContainer) return;
+
+        if (this.queueItems.length === 0) {
             // Show empty state
             queueContainer.innerHTML = `
                 <div class="py-16 px-6 text-center">
@@ -182,7 +187,110 @@ class QueueManager {
                     <p class="text-gray-400">Add songs from the browse section to build your karaoke queue!</p>
                 </div>
             `;
+        } else {
+            // Render queue items
+            queueContainer.innerHTML = this.queueItems.map((item, index) => this.renderQueueItem(item, index)).join('');
         }
+
+        // Update queue count in header
+        this.updateQueueHeader();
+    }
+
+    renderQueueItem(item, index) {
+        const duration = item.formatted_duration || '4:00';
+        const title = item.title || 'Unknown';
+        const artist = item.channel_title || item.artist || '';
+        const position = item.position || index;
+        const totalItems = this.queueItems.length;
+
+        // Build move buttons based on position
+        const moveUpBtn = index > 0 ? `
+            <button
+                onclick="moveQueueItem(${item.id}, ${position}, 'up')"
+                class="p-1.5 rounded bg-dark-600 hover:bg-dark-500 text-gray-400 hover:text-white transition"
+                title="Move Up"
+            >
+                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M7 14l5-5 5 5H7z"/>
+                </svg>
+            </button>
+        ` : '';
+
+        const moveDownBtn = index < totalItems - 1 ? `
+            <button
+                onclick="moveQueueItem(${item.id}, ${position}, 'down')"
+                class="p-1.5 rounded bg-dark-600 hover:bg-dark-500 text-gray-400 hover:text-white transition"
+                title="Move Down"
+            >
+                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M7 10l5 5 5-5H7z"/>
+                </svg>
+            </button>
+        ` : '';
+
+        return `
+            <div class="px-4 py-1">
+                <div class="flex items-center space-x-2 p-2 bg-dark-800 hover:bg-dark-700 rounded-lg transition group queue-item" data-item-id="${item.id}" data-position="${position}">
+                    <!-- Position Number -->
+                    <div class="flex-shrink-0 w-6 text-center">
+                        <span class="text-gray-500 text-sm font-medium">${index + 1}</span>
+                    </div>
+
+                    <!-- Play Button -->
+                    <button
+                        onclick="playQueueItem(${item.id})"
+                        class="flex-shrink-0 w-8 h-8 bg-dark-700 rounded-full flex items-center justify-center hover:bg-primary-600 transition"
+                        title="Play Now"
+                    >
+                        <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </button>
+
+                    <!-- Song Info - Takes most space -->
+                    <div class="flex-1 min-w-0 pr-2">
+                        <h4 class="text-white text-sm font-medium leading-tight" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;" title="${this.escapeHtml(title)}">${this.escapeHtml(title)}</h4>
+                        ${artist ? `<p class="text-xs text-gray-500 truncate">${this.escapeHtml(artist)}</p>` : ''}
+                    </div>
+
+                    <!-- Duration -->
+                    <div class="flex-shrink-0 text-xs text-gray-500 w-10 text-right">${duration}</div>
+
+                    <!-- Actions -->
+                    <div class="flex-shrink-0 flex items-center space-x-1">
+                        ${moveUpBtn}
+                        ${moveDownBtn}
+                        <button
+                            onclick="window.queueManager.removeFromQueue(${item.id})"
+                            class="p-1.5 rounded bg-dark-600 hover:bg-red-600 text-gray-400 hover:text-white transition"
+                            title="Remove"
+                        >
+                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    updateQueueHeader() {
+        // Find and update queue count
+        const headerDiv = document.querySelector('.queue-items-container')?.closest('.bg-dark-850')?.querySelector('.flex.items-center.justify-between');
+        if (headerDiv) {
+            const countSpan = headerDiv.querySelector('.text-gray-400');
+            if (countSpan) {
+                countSpan.textContent = `${this.queueItems.length} songs`;
+            }
+        }
+    }
+
+    escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
 }
 

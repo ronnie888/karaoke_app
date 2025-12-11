@@ -1,6 +1,6 @@
 # 🎤 Karaoke Tube
 
-A modern, feature-rich karaoke application built with Laravel 11, featuring YouTube integration, real-time queue management, and a beautiful dark-themed dashboard.
+A modern, feature-rich karaoke application built with Laravel 11, featuring **local file streaming** and **YouTube integration**, real-time queue management, and a beautiful dark-themed dashboard.
 
 ![Laravel](https://img.shields.io/badge/Laravel-11.x-FF2D20?logo=laravel)
 ![PHP](https://img.shields.io/badge/PHP-8.3-777BB4?logo=php)
@@ -9,8 +9,17 @@ A modern, feature-rich karaoke application built with Laravel 11, featuring YouT
 
 ## ✨ Features
 
+### 🎵 Core Features
+- **Local File Streaming** - Stream 750+ karaoke MP4 files with HTTP range support
+- **YouTube Integration** - Fallback to YouTube videos when needed
+- **Full-Text Search** - Search across 750+ songs by title, artist, or genre
+- **Genre Detection** - Automatic genre classification (OPM, Rock, Pop, Country, etc.)
+- **Language Support** - Detect and filter Filipino/English songs
+- **Video Player** - HTML5 player with seeking, volume control, and autoplay
+- **CDN-Ready** - DigitalOcean Spaces integration with global CDN delivery
+
 ### 🎵 Dashboard Features
-- **Now Playing** - YouTube video player with custom controls
+- **Now Playing** - YouTube/Local video player with custom controls
 - **Queue Management** - Add, remove, reorder, and manage your karaoke queue
 - **Drag & Drop** - Reorder songs with smooth drag-and-drop interface
 - **Auto-Play** - First song starts automatically when added to empty queue
@@ -26,6 +35,10 @@ A modern, feature-rich karaoke application built with Laravel 11, featuring YouT
 - **Real-time Updates** - Queue updates without page refresh
 
 ### 🔧 Technical Features
+- **Local File Indexing** - Intelligent filename parsing with metadata extraction
+- **FFmpeg Integration** - Video metadata extraction (duration, codecs, resolution)
+- **HTTP Range Requests** - Byte-range streaming for video seeking/resuming
+- **Laravel Scout** - Full-text search with database driver
 - **YouTube Data API v3** integration
 - **Redis** caching for performance
 - **SortableJS** for drag-and-drop
@@ -43,7 +56,9 @@ A modern, feature-rich karaoke application built with Laravel 11, featuring YouT
 - **Node.js 20+** & **pnpm**
 - **MySQL 8.0+** or MariaDB
 - **Redis 7+**
-- **YouTube Data API v3** key
+- **FFmpeg** (for video metadata extraction)
+- **YouTube Data API v3** key (optional, for YouTube fallback)
+- **DigitalOcean Spaces** or S3-compatible storage (for production)
 
 ---
 
@@ -99,7 +114,7 @@ DB_USERNAME=laravel_user
 DB_PASSWORD=1234567890
 ```
 
-### 5. Configure YouTube API
+### 5. Configure YouTube API (Optional)
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Create a new project or select existing
@@ -110,7 +125,21 @@ DB_PASSWORD=1234567890
 YOUTUBE_API_KEY=your_api_key_here
 ```
 
-### 6. Configure Redis
+### 6. Index Local Karaoke Files
+
+**For local development:**
+```bash
+# Index test files (10 songs)
+php artisan karaoke:index "D:\HD KARAOKE SONGS" --limit=10 --skip-upload --force
+
+# Index all files
+php artisan karaoke:index "D:\HD KARAOKE SONGS" --skip-upload
+```
+
+**For production deployment:**
+See [DEPLOYMENT-READY.md](DEPLOYMENT-READY.md) for complete deployment guide.
+
+### 7. Configure Redis
 ```env
 CACHE_DRIVER=redis
 SESSION_DRIVER=redis
@@ -121,17 +150,17 @@ REDIS_PASSWORD=null
 REDIS_PORT=6379
 ```
 
-### 7. Run Migrations
+### 8. Run Migrations
 ```bash
 php artisan migrate --seed
 ```
 
-### 8. Build Frontend Assets
+### 9. Build Frontend Assets
 ```bash
 pnpm run build
 ```
 
-### 9. Generate IDE Helper Files (Optional)
+### 10. Generate IDE Helper Files (Optional)
 ```bash
 php artisan ide-helper:generate
 php artisan ide-helper:models --nowrite
@@ -226,6 +255,33 @@ Mobile optimizations:
 
 ## 🗄️ Database Schema
 
+### songs (NEW)
+Stores local karaoke file metadata with 40+ fields.
+
+| Column | Type | Description |
+|--------|------|-------------|
+| id | BIGINT | Primary key |
+| file_path | VARCHAR | Local/cloud file path |
+| file_name | VARCHAR | Original filename |
+| file_size | BIGINT | File size in bytes |
+| file_hash | VARCHAR | SHA256 hash (unique) |
+| title | VARCHAR | Parsed song title |
+| artist | VARCHAR | Parsed artist name |
+| genre | VARCHAR | Auto-detected genre |
+| language | VARCHAR | Detected language |
+| duration | INT | Song duration (seconds) |
+| video_codec | VARCHAR | Video codec info |
+| audio_codec | VARCHAR | Audio codec info |
+| bitrate | INT | Video bitrate |
+| width | INT | Video width |
+| height | INT | Video height |
+| search_text | TEXT | Full-text search field |
+| play_count | INT | Times played |
+| storage_driver | ENUM | local/spaces/s3 |
+| cdn_url | VARCHAR | CDN URL for streaming |
+| index_status | ENUM | pending/completed/failed |
+| indexed_at | TIMESTAMP | When indexed |
+
 ### karaoke_sessions
 Stores user karaoke sessions with active queue state.
 
@@ -244,10 +300,11 @@ Stores individual songs in each session's queue.
 |--------|------|-------------|
 | id | BIGINT | Primary key |
 | session_id | BIGINT | Session foreign key |
-| video_id | VARCHAR | YouTube video ID |
+| song_id | BIGINT | Local song foreign key (NEW) |
+| video_id | VARCHAR | YouTube video ID (fallback) |
 | title | VARCHAR | Song title |
 | thumbnail | VARCHAR | Thumbnail URL |
-| channel_title | VARCHAR | YouTube channel name |
+| channel_title | VARCHAR | YouTube channel/Artist name |
 | duration | INT | Song duration (seconds) |
 | position | INT | Queue position |
 | is_playing | BOOLEAN | Currently playing flag |
@@ -255,6 +312,53 @@ Stores individual songs in each session's queue.
 ---
 
 ## 🔌 API Endpoints
+
+### Song Search & Browse (NEW)
+
+**Search Songs**
+```
+GET /api/songs/search?q=love&genre=OPM&artist=Sarah&language=filipino
+```
+
+**Browse Songs**
+```
+GET /api/songs/browse?type=popular&limit=50
+GET /api/songs/browse?type=recent&limit=50
+GET /api/songs/browse?type=genre&genre=Rock
+```
+
+**Get Genres**
+```
+GET /api/songs/genres
+```
+
+**Get Artists**
+```
+GET /api/songs/artists
+```
+
+**Filter by Language**
+```
+GET /api/songs/by-language?language=filipino
+```
+
+**Get Single Song**
+```
+GET /api/songs/{id}
+```
+
+### Video Streaming (NEW)
+
+**Stream Video**
+```
+GET /songs/{id}/stream
+Headers: Range: bytes=0-1024 (optional, for seeking)
+```
+
+**Get Song Metadata**
+```
+GET /songs/{id}/metadata
+```
 
 ### Queue Management
 
@@ -267,7 +371,8 @@ GET /queue
 ```
 POST /queue/add
 Body: {
-    video_id: string,
+    song_id: number (NEW - for local songs),
+    video_id: string (fallback - for YouTube),
     title: string,
     thumbnail: string,
     channel_title: string,
@@ -513,6 +618,15 @@ DEBUGBAR_ENABLED=false
 
 ## 📚 Documentation
 
+### Local Files System
+- **Deployment Guide** - [DEPLOYMENT-READY.md](DEPLOYMENT-READY.md)
+- **Next Steps** - [NEXT-STEPS.md](NEXT-STEPS.md)
+- **Implementation Complete** - [.claude/KARAOKE APP/IMPLEMENTATION-COMPLETE.md](.claude/KARAOKE APP/IMPLEMENTATION-COMPLETE.md)
+- **API Testing Results** - [API-TESTING-RESULTS.md](API-TESTING-RESULTS.md)
+- **Migration Plan** - [.claude/KARAOKE APP/local-files-migration-plan.md](.claude/KARAOKE APP/local-files-migration-plan.md)
+- **Testing Guide** - [.claude/KARAOKE APP/TESTING-GUIDE.md](.claude/KARAOKE APP/TESTING-GUIDE.md)
+
+### General
 - **Project Plan** - `.claude/project-plan.md`
 - **Laravel Guide** - `CLAUDE.md`
 - **Features Implementation** - `.claude/KARAOKE APP/dashboard-features-implementation.md`
@@ -525,10 +639,45 @@ DEBUGBAR_ENABLED=false
 
 ### Common Issues
 
+**Song Indexing Fails**
+```bash
+# Check FFmpeg installation
+ffmpeg -version
+
+# Install FFmpeg (Windows)
+# Download from: https://www.gyan.dev/ffmpeg/builds/
+# Extract to C:\ffmpeg
+# Update .env: FFMPEG_BINARIES=C:\ffmpeg\bin\ffmpeg.exe
+
+# Re-index with force flag
+php artisan karaoke:index "D:\HD KARAOKE SONGS" --limit=10 --force
+```
+
+**Video Streaming Not Working**
+```bash
+# Check file permissions
+# Windows: Ensure file path is accessible
+# Linux: chmod 644 /path/to/songs/*.mp4
+
+# Verify storage disk configuration
+php artisan config:clear
+php artisan tinker
+>>> Storage::disk('local')->exists('songs/test.mp4');
+```
+
+**Search Returns No Results**
+```bash
+# Check if songs are indexed
+mysql -h 127.0.0.1 -P 3307 -u laravel_user -p1234567890 karaoke -e "SELECT COUNT(*) FROM songs WHERE index_status = 'completed';"
+
+# Re-import to Scout index
+php artisan scout:import "App\Models\Song"
+```
+
 **YouTube API Quota Exceeded**
 - Check quota in Google Cloud Console
 - Implement caching (already configured with Redis)
-- Reduce API calls by caching popular songs
+- Use local files instead of YouTube
 
 **Database Connection Error**
 ```bash
@@ -591,3 +740,5 @@ For issues or questions, please check the documentation in `.claude/KARAOKE APP/
 
 
 cd /home/forge/karaoke_app-brygxt7o.on-forge.com/current && git pull origin main && npm install --production && npm run build && php artisan view:clear && php artisan view:cache && php artisan config:cache
+
+php artisan pail
