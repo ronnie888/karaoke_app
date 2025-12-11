@@ -103,22 +103,72 @@
         </header>
 
         <!-- Main Content -->
-        <main class="flex-1 overflow-hidden">
+        <main class="flex-1 overflow-auto md:overflow-hidden" x-data="{ mobileView: 'player' }">
             <div class="h-full max-w-[1920px] mx-auto px-2 sm:px-4 lg:px-8 py-3 sm:py-6">
-                <!-- 3-Column Grid Layout with Mobile Optimization -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-4 lg:gap-6 h-full">
-                    <!-- Left Column: Now Playing (40% on lg, full width on mobile, 50% on tablet) -->
-                    <div class="lg:col-span-5 md:col-span-2 h-[400px] sm:h-[500px] md:h-full">
+
+                <!-- Mobile Tab Navigation (visible only on small screens) -->
+                <div class="md:hidden flex mb-3 bg-dark-800 rounded-lg p-1">
+                    <button
+                        @click="mobileView = 'player'"
+                        :class="mobileView === 'player' ? 'bg-primary-600 text-white' : 'text-gray-400'"
+                        class="flex-1 py-2 px-3 rounded-md text-sm font-medium transition"
+                    >
+                        Now Playing
+                    </button>
+                    <button
+                        @click="mobileView = 'queue'"
+                        :class="mobileView === 'queue' ? 'bg-primary-600 text-white' : 'text-gray-400'"
+                        class="flex-1 py-2 px-3 rounded-md text-sm font-medium transition"
+                    >
+                        Queue
+                    </button>
+                    <button
+                        @click="mobileView = 'browse'"
+                        :class="mobileView === 'browse' ? 'bg-primary-600 text-white' : 'text-gray-400'"
+                        class="flex-1 py-2 px-3 rounded-md text-sm font-medium transition"
+                    >
+                        Browse
+                    </button>
+                </div>
+
+                <!-- 3-Column Grid Layout (Desktop/Tablet) -->
+                <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-4 lg:gap-6 h-full">
+                    <!-- Left Column: Now Playing -->
+                    <div class="lg:col-span-5 md:col-span-2 h-full">
                         <x-now-playing :current-item="$currentItem" :session-id="$session->id" />
                     </div>
 
-                    <!-- Middle Column: Upcoming Queue (30% on lg, 50% on tablet, full on mobile) -->
-                    <div class="lg:col-span-3 md:col-span-1 h-[350px] sm:h-[400px] md:h-full overflow-hidden">
+                    <!-- Middle Column: Upcoming Queue -->
+                    <div class="lg:col-span-3 md:col-span-1 h-full overflow-hidden">
                         <x-queue-list :queue-items="$queueItems" />
                     </div>
 
-                    <!-- Right Column: Search & Browse (30% on lg, 50% on tablet, full on mobile) -->
-                    <div class="lg:col-span-4 md:col-span-1 h-[400px] sm:h-[500px] md:h-full overflow-hidden">
+                    <!-- Right Column: Search & Browse -->
+                    <div class="lg:col-span-4 md:col-span-1 h-full overflow-hidden">
+                        <x-tabbed-browse
+                            :popular-songs="$popularSongs"
+                            :favorites="$favorites"
+                            :current-video-id="$currentItem?->video_id"
+                            :library-songs="$librarySongs"
+                            :library-songs-count="$librarySongsCount"
+                        />
+                    </div>
+                </div>
+
+                <!-- Mobile Single View -->
+                <div class="md:hidden">
+                    <!-- Now Playing (Mobile) -->
+                    <div x-show="mobileView === 'player'" class="h-[calc(100vh-180px)]">
+                        <x-now-playing :current-item="$currentItem" :session-id="$session->id" />
+                    </div>
+
+                    <!-- Queue (Mobile) -->
+                    <div x-show="mobileView === 'queue'" class="h-[calc(100vh-180px)]">
+                        <x-queue-list :queue-items="$queueItems" />
+                    </div>
+
+                    <!-- Browse (Mobile) -->
+                    <div x-show="mobileView === 'browse'" class="h-[calc(100vh-180px)]">
                         <x-tabbed-browse
                             :popular-songs="$popularSongs"
                             :favorites="$favorites"
