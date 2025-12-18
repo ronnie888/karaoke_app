@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="min-h-screen bg-gray-50 pb-24 md:pb-8" x-data="libraryApp()">
-    <!-- Header with Search (top-14 on mobile for mobile header, top-16 on desktop for nav) -->
+    <!-- Header with Search (top-14 on mobile for mobile header, top-16 on desktop below fixed nav) -->
     <div class="sticky top-14 md:top-16 z-40 bg-white shadow-sm">
         <div class="max-w-7xl mx-auto px-4 py-3">
             <!-- Search Bar -->
