@@ -16,29 +16,29 @@
 </head>
 <body class="font-sans antialiased bg-gray-50">
     <!-- Navigation (Desktop) -->
-    <nav class="bg-white shadow-sm border-b border-gray-200 hidden md:block fixed top-0 left-0 right-0 z-50">
+    <nav class="bg-white shadow-sm border-b border-gray-200 hidden md:block fixed top-0 left-0 right-0 z-50" style="background-color: #ffffff;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <!-- Logo & Main Nav -->
                 <div class="flex items-center space-x-8">
                     <!-- Logo -->
                     <a href="{{ route('home') }}" class="flex items-center">
-                        <svg class="w-8 h-8 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 24 24" style="color: #dc2626;">
                             <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
                         </svg>
-                        <span class="ml-2 text-xl font-bold text-gray-900">Karaoke Tube</span>
+                        <span class="ml-2 text-xl font-bold text-gray-900" style="color: #111827;">Karaoke Tube</span>
                     </a>
 
                     @auth
                     <!-- Desktop Navigation -->
                     <div class="flex items-center space-x-1">
-                        <a href="{{ route('library') }}" class="{{ request()->routeIs('library') ? 'bg-primary-50 text-primary-700' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50' }} px-3 py-2 rounded-md text-sm font-medium transition">
+                        <a href="{{ route('library') }}" class="{{ request()->routeIs('library') ? 'bg-primary-50 text-primary-700' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50' }} px-3 py-2 rounded-md text-sm font-medium transition" style="color: {{ request()->routeIs('library') ? '#b91c1c' : '#374151' }};">
                             Library
                         </a>
-                        <a href="{{ route('library.playing') }}" class="{{ request()->routeIs('library.playing') ? 'bg-primary-50 text-primary-700' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50' }} px-3 py-2 rounded-md text-sm font-medium transition">
+                        <a href="{{ route('library.playing') }}" class="{{ request()->routeIs('library.playing') ? 'bg-primary-50 text-primary-700' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50' }} px-3 py-2 rounded-md text-sm font-medium transition" style="color: {{ request()->routeIs('library.playing') ? '#b91c1c' : '#374151' }};">
                             Now Playing
                         </a>
-                        <a href="{{ route('playlists.index') }}" class="{{ request()->routeIs('playlists.*') ? 'bg-primary-50 text-primary-700' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50' }} px-3 py-2 rounded-md text-sm font-medium transition">
+                        <a href="{{ route('playlists.index') }}" class="{{ request()->routeIs('playlists.*') ? 'bg-primary-50 text-primary-700' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50' }} px-3 py-2 rounded-md text-sm font-medium transition" style="color: {{ request()->routeIs('playlists.*') ? '#b91c1c' : '#374151' }};">
                             Playlists
                         </a>
                     </div>
@@ -50,8 +50,8 @@
                     @auth
                         <!-- User Dropdown -->
                         <div x-data="{ open: false }" class="relative">
-                            <button @click="open = !open" class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 transition">
-                                <span>{{ auth()->user()->name }}</span>
+                            <button @click="open = !open" class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 transition" style="color: #374151;">
+                                <span style="color: #374151;">{{ auth()->user()->name }}</span>
                                 <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                 </svg>
