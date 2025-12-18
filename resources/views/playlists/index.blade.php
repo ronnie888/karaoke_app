@@ -32,7 +32,7 @@
                             <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ $playlist->description }}</p>
                         @endif
                         <div class="flex items-center justify-between text-sm text-gray-500">
-                            <span>{{ $playlist->items_count }} {{ Str::plural('video', $playlist->items_count) }}</span>
+                            <span>{{ $playlist->items_count }} {{ Str::plural('song', $playlist->items_count) }}</span>
                             <span class="flex items-center">
                                 @if($playlist->is_public)
                                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

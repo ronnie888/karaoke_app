@@ -48,6 +48,7 @@ class QueueController extends Controller
                 'message' => 'Song added to queue',
                 'data' => $queueItem->load('song'),
                 'auto_played' => $wasEmpty,
+                'queueCount' => $session->queueItems()->queued()->count(),
             ]);
         }
 
@@ -276,6 +277,86 @@ class QueueController extends Controller
             'success' => true,
             'message' => 'Now playing',
             'data' => $item,
+        ]);
+    }
+
+    /**
+     * Move queue item up (decrease position)
+     */
+    public function moveUp(Request $request, int $itemId): JsonResponse
+    {
+        $session = KaraokeSession::getOrCreateForUser(auth()->id());
+        $item = $session->queueItems()->queued()->find($itemId);
+
+        if (!$item) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Queue item not found',
+            ], 404);
+        }
+
+        // Find the item above
+        $aboveItem = $session->queueItems()
+            ->queued()
+            ->where('position', '<', $item->position)
+            ->orderBy('position', 'desc')
+            ->first();
+
+        if (!$aboveItem) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Already at top',
+            ], 400);
+        }
+
+        // Swap positions
+        $tempPos = $item->position;
+        $item->update(['position' => $aboveItem->position]);
+        $aboveItem->update(['position' => $tempPos]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Moved up',
+        ]);
+    }
+
+    /**
+     * Move queue item down (increase position)
+     */
+    public function moveDown(Request $request, int $itemId): JsonResponse
+    {
+        $session = KaraokeSession::getOrCreateForUser(auth()->id());
+        $item = $session->queueItems()->queued()->find($itemId);
+
+        if (!$item) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Queue item not found',
+            ], 404);
+        }
+
+        // Find the item below
+        $belowItem = $session->queueItems()
+            ->queued()
+            ->where('position', '>', $item->position)
+            ->orderBy('position', 'asc')
+            ->first();
+
+        if (!$belowItem) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Already at bottom',
+            ], 400);
+        }
+
+        // Swap positions
+        $tempPos = $item->position;
+        $item->update(['position' => $belowItem->position]);
+        $belowItem->update(['position' => $tempPos]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Moved down',
         ]);
     }
 }

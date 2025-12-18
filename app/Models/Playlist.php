@@ -35,7 +35,7 @@ class Playlist extends Model
 
     public function items(): HasMany
     {
-        return $this->hasMany(PlaylistItem::class)->orderBy('position');
+        return $this->hasMany(PlaylistItem::class)->with('song')->orderBy('position');
     }
 
     // Scopes
@@ -61,6 +61,18 @@ class Playlist extends Model
     }
 
     // Business Logic Methods
+    public function addSong(int $songId): PlaylistItem
+    {
+        $song = Song::find($songId);
+
+        return $this->items()->create([
+            'song_id' => $songId,
+            'title' => $song?->title ?? 'Unknown',
+            'duration' => $song?->duration,
+            'position' => ($this->items()->max('position') ?? -1) + 1,
+        ]);
+    }
+
     public function addVideo(string $videoId, array $metadata): void
     {
         $this->items()->create([
@@ -68,11 +80,11 @@ class Playlist extends Model
             'title' => $metadata['title'],
             'thumbnail' => $metadata['thumbnail'] ?? null,
             'duration' => $metadata['duration'] ?? null,
-            'position' => $this->items()->max('position') + 1,
+            'position' => ($this->items()->max('position') ?? -1) + 1,
         ]);
     }
 
-    public function removeVideo(int $itemId): void
+    public function removeItem(int $itemId): void
     {
         $this->items()->where('id', $itemId)->delete();
 
@@ -80,5 +92,15 @@ class Playlist extends Model
         $this->items()->orderBy('position')->get()->each(function ($item, $index) {
             $item->update(['position' => $index]);
         });
+    }
+
+    public function removeVideo(int $itemId): void
+    {
+        $this->removeItem($itemId);
+    }
+
+    public function hasSong(int $songId): bool
+    {
+        return $this->items()->where('song_id', $songId)->exists();
     }
 }

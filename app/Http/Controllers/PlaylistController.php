@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Playlist;
+use App\Models\Song;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -129,5 +130,52 @@ class PlaylistController extends Controller
         $playlist->removeVideo($itemId);
 
         return back()->with('success', 'Video removed from playlist!');
+    }
+
+    public function addSong(Request $request, Playlist $playlist): JsonResponse|RedirectResponse
+    {
+        Gate::authorize('update', $playlist);
+
+        $validated = $request->validate([
+            'song_id' => 'required|integer|exists:songs,id',
+        ]);
+
+        // Check if song already exists in playlist
+        if ($playlist->hasSong($validated['song_id'])) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Song already in playlist!',
+                ], 400);
+            }
+            return back()->with('error', 'Song already in playlist!');
+        }
+
+        $playlist->addSong($validated['song_id']);
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Song added to playlist!',
+            ]);
+        }
+
+        return back()->with('success', 'Song added to playlist!');
+    }
+
+    public function removeSong(Playlist $playlist, int $itemId): JsonResponse|RedirectResponse
+    {
+        Gate::authorize('update', $playlist);
+
+        $playlist->removeItem($itemId);
+
+        if (request()->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Song removed from playlist!',
+            ]);
+        }
+
+        return back()->with('success', 'Song removed from playlist!');
     }
 }

@@ -37,20 +37,64 @@
                     </div>
 
                     <!-- Search Bar (Hidden on very small screens) -->
-                    <div class="hidden sm:flex flex-1 max-w-2xl mx-4 md:mx-8">
-                        <form action="{{ route('search') }}" method="GET" class="relative w-full">
+                    <div class="hidden sm:flex flex-1 max-w-2xl mx-4 md:mx-8" x-data="librarySearchHeader()">
+                        <div class="relative w-full">
                             <input
                                 type="search"
-                                name="q"
-                                placeholder="Search..."
+                                x-model="query"
+                                @input.debounce.300ms="search"
+                                @focus="showResults = true"
+                                @keydown.escape="showResults = false"
+                                placeholder="Search library..."
                                 class="w-full px-3 sm:px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
                             />
-                            <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white">
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+                                <svg x-show="!searching" class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                                 </svg>
-                            </button>
-                        </form>
+                                <svg x-show="searching" class="w-4 h-4 sm:w-5 sm:h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                            </div>
+
+                            <!-- Search Results Dropdown -->
+                            <div
+                                x-show="showResults && (results.length > 0 || (query.length >= 2 && !searching))"
+                                @click.away="showResults = false"
+                                class="absolute top-full left-0 right-0 mt-2 bg-dark-800 border border-dark-700 rounded-lg shadow-xl z-50 max-h-96 overflow-y-auto"
+                            >
+                                <template x-if="results.length > 0">
+                                    <div class="py-2">
+                                        <p class="px-4 py-1 text-xs text-gray-500" x-text="results.length + ' songs found'"></p>
+                                        <template x-for="song in results" :key="song.id">
+                                            <button
+                                                @click="addToQueue(song.id); showResults = false; query = ''"
+                                                class="w-full flex items-center space-x-3 px-4 py-2 hover:bg-dark-700 transition text-left"
+                                            >
+                                                <div class="w-10 h-10 bg-green-900/30 rounded flex items-center justify-center flex-shrink-0">
+                                                    <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="text-white font-medium truncate text-sm" x-text="song.title"></p>
+                                                    <p class="text-gray-400 text-xs truncate" x-text="song.artist || 'Unknown Artist'"></p>
+                                                </div>
+                                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                                </svg>
+                                            </button>
+                                        </template>
+                                    </div>
+                                </template>
+                                <template x-if="results.length === 0 && query.length >= 2 && !searching">
+                                    <div class="px-4 py-3 text-gray-400 text-sm text-center">
+                                        No songs found matching "<span x-text="query"></span>"
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- User Menu -->
@@ -184,6 +228,86 @@
 
     <!-- Toast Notifications -->
     <x-toast-container />
+
+    <!-- Library Search Header Script -->
+    <script>
+    function librarySearchHeader() {
+        return {
+            query: '',
+            results: [],
+            searching: false,
+            showResults: false,
+
+            async search() {
+                if (this.query.length < 2) {
+                    this.results = [];
+                    return;
+                }
+
+                this.searching = true;
+
+                try {
+                    const response = await fetch(`/api/songs/search?q=${encodeURIComponent(this.query)}`, {
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    const data = await response.json();
+
+                    if (data.success) {
+                        this.results = data.data;
+                        this.showResults = true;
+                    } else {
+                        this.results = [];
+                    }
+                } catch (error) {
+                    console.error('Error searching library:', error);
+                    this.results = [];
+                } finally {
+                    this.searching = false;
+                }
+            },
+
+            async addToQueue(songId) {
+                try {
+                    const response = await fetch('/queue/add', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content,
+                            'Accept': 'application/json',
+                        },
+                        body: JSON.stringify({ song_id: songId }),
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        if (window.showToast) {
+                            window.showToast('Song added to queue!', 'success');
+                        }
+
+                        if (window.queueManager) {
+                            await window.queueManager.fetchQueue();
+                            window.queueManager.refreshQueueDisplay();
+                        }
+
+                        if (data.auto_played) {
+                            setTimeout(() => window.location.reload(), 500);
+                        }
+                    } else {
+                        if (window.showToast) {
+                            window.showToast('Failed to add song', 'error');
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error adding song to queue:', error);
+                    if (window.showToast) {
+                        window.showToast('Error adding song', 'error');
+                    }
+                }
+            }
+        };
+    }
+    </script>
 
     @stack('scripts')
 </body>

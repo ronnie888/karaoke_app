@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HistoryController;
-use App\Http\Controllers\KaraokeController;
+use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QueueController;
@@ -11,10 +10,10 @@ use App\Http\Controllers\SongSearchController;
 use App\Http\Controllers\SongStreamController;
 use Illuminate\Support\Facades\Route;
 
-// Public karaoke routes
-Route::get('/', [KaraokeController::class, 'index'])->name('home');
-Route::get('/search', [KaraokeController::class, 'search'])->name('search');
-Route::get('/watch/{videoId}', [KaraokeController::class, 'watch'])->name('watch');
+// Redirect home to library (requires auth)
+Route::get('/', function () {
+    return redirect()->route('library');
+})->name('home');
 
 // Song Routes (Local Files)
 Route::get('/songs/{song}/stream', [SongStreamController::class, 'stream'])->name('songs.stream');
@@ -30,11 +29,17 @@ Route::prefix('api/songs')->group(function () {
     Route::get('/{song}', [SongSearchController::class, 'show'])->name('api.songs.show');
 });
 
-// Karaoke Dashboard (authenticated)
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
-Route::get('/dashboard/trending', [DashboardController::class, 'trending'])->middleware('auth')->name('dashboard.trending');
-Route::get('/dashboard/genre/{genre}', [DashboardController::class, 'genre'])->middleware('auth')->name('dashboard.genre');
-Route::get('/dashboard/top3/{videoId}', [DashboardController::class, 'top3'])->middleware('auth')->name('dashboard.top3');
+// Library (main authenticated experience)
+Route::middleware('auth')->group(function () {
+    Route::get('/library', [LibraryController::class, 'index'])->name('library');
+    Route::get('/library/playing', [LibraryController::class, 'playing'])->name('library.playing');
+    Route::get('/library/search', [LibraryController::class, 'search'])->name('library.search');
+});
+
+// Legacy Dashboard (redirect to library)
+Route::get('/dashboard', function () {
+    return redirect()->route('library');
+})->middleware('auth')->name('dashboard');
 
 // Authentication routes (Breeze)
 require __DIR__.'/auth.php';
@@ -49,7 +54,9 @@ Route::middleware('auth')->group(function () {
     // Playlists
     Route::resource('playlists', PlaylistController::class);
     Route::post('/playlists/{playlist}/add', [PlaylistController::class, 'addVideo'])->name('playlists.addVideo');
+    Route::post('/playlists/{playlist}/add-song', [PlaylistController::class, 'addSong'])->name('playlists.addSong');
     Route::delete('/playlists/{playlist}/remove/{item}', [PlaylistController::class, 'removeVideo'])->name('playlists.removeVideo');
+    Route::delete('/playlists/{playlist}/remove-song/{item}', [PlaylistController::class, 'removeSong'])->name('playlists.removeSong');
 
     // Favorites
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
@@ -69,4 +76,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/queue/reorder', [QueueController::class, 'reorder'])->name('queue.reorder');
     Route::post('/queue/next', [QueueController::class, 'next'])->name('queue.next');
     Route::post('/queue/play/{itemId}', [QueueController::class, 'play'])->name('queue.play');
+    Route::post('/queue/{itemId}/move-up', [QueueController::class, 'moveUp'])->name('queue.moveUp');
+    Route::post('/queue/{itemId}/move-down', [QueueController::class, 'moveDown'])->name('queue.moveDown');
 });
